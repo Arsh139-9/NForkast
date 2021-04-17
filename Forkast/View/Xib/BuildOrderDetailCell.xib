@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="155" id="VGA-Xx-lcs" customClass="BuildOrderDetailCell" customModule="Forkast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="472" height="155"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VGA-Xx-lcs" id="Sbf-BL-hum">
+                <rect key="frame" x="0.0" y="0.0" width="472" height="155"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileImg" translatesAutoresizingMaskIntoConstraints="NO" id="lBB-Tl-yeT">
+                        <rect key="frame" x="13" y="21" width="89.5" height="113"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="9"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TUn-a0-Ava">
+                        <rect key="frame" x="113.5" y="25" width="193" height="105.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Whole Milk Mozarella" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efb-U0-IIM">
+                                <rect key="frame" x="0.0" y="0.0" width="193" height="20.5"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHEESE/DIARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weI-DY-E5W">
+                                <rect key="frame" x="0.0" y="25.5" width="193" height="17"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                <color key="textColor" red="0.54183894399999999" green="0.5419179797" blue="0.54181408880000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boxes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPL-d3-hsT">
+                                <rect key="frame" x="0.0" y="47.5" width="193" height="16"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                </variation>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="-43" translatesAutoresizingMaskIntoConstraints="NO" id="DUy-ke-qGN">
+                                <rect key="frame" x="0.0" y="68.5" width="193" height="16"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNW-ru-WkE">
+                                        <rect key="frame" x="0.0" y="0.0" width="118" height="16"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vya-hU-EM2">
+                                        <rect key="frame" x="75" y="0.0" width="118" height="16"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="-13" translatesAutoresizingMaskIntoConstraints="NO" id="CWl-hR-ABf">
+                                <rect key="frame" x="0.0" y="89.5" width="193" height="16"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theoretical Usage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1q-pn-wa2">
+                                        <rect key="frame" x="0.0" y="0.0" width="103" height="16"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peP-BY-ojP">
+                                        <rect key="frame" x="90" y="0.0" width="103" height="16"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-fJ-U7j">
+                        <rect key="frame" x="417" y="56.5" width="42" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Pp4-fJ-U7j" secondAttribute="height" multiplier="1:1" id="VGu-h2-Ibu"/>
+                        </constraints>
+                        <state key="normal" image="plusBtnImg"/>
+                    </button>
+                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ztb-0S-KsD">
+                        <rect key="frame" x="345" y="60.5" width="61" height="34"/>
+                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
+                        </variation>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dv-ct-loe">
+                        <rect key="frame" x="292" y="56.5" width="42" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="9dv-ct-loe" secondAttribute="height" multiplier="1:1" id="jfc-6e-i2u"/>
+                        </constraints>
+                        <state key="normal" image="minusBtnImg"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ztb-0S-KsD" firstAttribute="leading" secondItem="9dv-ct-loe" secondAttribute="trailing" constant="11" id="2iz-XO-RlO"/>
+                    <constraint firstItem="Pp4-fJ-U7j" firstAttribute="leading" secondItem="Ztb-0S-KsD" secondAttribute="trailing" constant="11" id="4ep-y5-83T"/>
+                    <constraint firstItem="Pp4-fJ-U7j" firstAttribute="centerY" secondItem="Sbf-BL-hum" secondAttribute="centerY" id="8Bf-xh-2eB"/>
+                    <constraint firstItem="lBB-Tl-yeT" firstAttribute="leading" secondItem="Sbf-BL-hum" secondAttribute="leading" constant="13" id="AN8-FD-Vc7"/>
+                    <constraint firstItem="TUn-a0-Ava" firstAttribute="centerY" secondItem="lBB-Tl-yeT" secondAttribute="centerY" id="HpP-iY-Xip"/>
+                    <constraint firstItem="Ztb-0S-KsD" firstAttribute="centerY" secondItem="Sbf-BL-hum" secondAttribute="centerY" id="KQz-Ba-KJp"/>
+                    <constraint firstItem="lBB-Tl-yeT" firstAttribute="centerY" secondItem="Sbf-BL-hum" secondAttribute="centerY" id="U7t-m5-hge"/>
+                    <constraint firstItem="9dv-ct-loe" firstAttribute="height" secondItem="Pp4-fJ-U7j" secondAttribute="height" id="eJO-xL-iQn"/>
+                    <constraint firstItem="TUn-a0-Ava" firstAttribute="leading" secondItem="lBB-Tl-yeT" secondAttribute="trailing" constant="11" id="hXA-mD-nVA"/>
+                    <constraint firstItem="9dv-ct-loe" firstAttribute="centerY" secondItem="Sbf-BL-hum" secondAttribute="centerY" id="lWi-bB-hzF"/>
+                    <constraint firstAttribute="trailing" secondItem="Pp4-fJ-U7j" secondAttribute="trailing" constant="13" id="vfp-dB-fJO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="lBB-Tl-yeT" firstAttribute="width" secondItem="VGA-Xx-lcs" secondAttribute="width" multiplier="0.19" id="9HK-5i-1Fo"/>
+                <constraint firstItem="Ztb-0S-KsD" firstAttribute="width" secondItem="VGA-Xx-lcs" secondAttribute="width" multiplier="0.13" id="SVf-Rv-6Mz"/>
+                <constraint firstItem="Pp4-fJ-U7j" firstAttribute="height" secondItem="VGA-Xx-lcs" secondAttribute="height" multiplier="0.27" id="mSe-Bq-fcC"/>
+                <constraint firstItem="lBB-Tl-yeT" firstAttribute="height" secondItem="VGA-Xx-lcs" secondAttribute="height" multiplier="0.73" id="scP-OG-ubm"/>
+            </constraints>
+            <connections>
+                <outlet property="buildOrderCaseLbl" destination="qPL-d3-hsT" id="HUH-B3-31d"/>
+                <outlet property="buildOrderIngredientNameLbl" destination="weI-DY-E5W" id="oEn-T1-IL0"/>
+                <outlet property="buildOrderProductImgView" destination="lBB-Tl-yeT" id="znv-XY-dnK"/>
+                <outlet property="buildOrderProductNameLbl" destination="Efb-U0-IIM" id="kqa-sq-Unj"/>
+                <outlet property="buildOrderQuantityLbl" destination="vya-hU-EM2" id="EGk-4H-CC2"/>
+                <outlet property="buildOrderQuantityTF" destination="Ztb-0S-KsD" id="NWH-0f-a1D"/>
+                <outlet property="buildOrderTheoreticalUsageLbl" destination="peP-BY-ojP" id="1y0-So-Bql"/>
+                <outlet property="decreaseQuantityBtn" destination="9dv-ct-loe" id="cwv-WP-HGi"/>
+                <outlet property="increaseQuantityBtn" destination="Pp4-fJ-U7j" id="ogh-nm-syz"/>
+            </connections>
+            <point key="canvasLocation" x="-119" y="-104"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="minusBtnImg" width="76" height="76"/>
+        <image name="plusBtnImg" width="76" height="76"/>
+        <image name="profileImg" width="152" height="150"/>
+    </resources>
+</document>
