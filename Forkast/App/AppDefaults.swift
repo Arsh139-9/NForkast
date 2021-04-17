@@ -14,6 +14,8 @@ struct AppDefaults {
     static let isUserLoggedIn = "isUserLoggedIn"
 }
 
+//tiworyeowiryoeiwyrioewyiorywe
+
 func setAppDefaults<T>(_ value:T,key: String) {
     UserDefaults.standard.set(value, forKey: key)
     UserDefaults.standard.synchronize()
