@@ -225,24 +225,24 @@ class AddIngredientForkastVC: UIViewController {
                 from: self
             )
         }
-        else if lessCaseUnitTF.text?.trimmingCharacters(in: .whitespaces) == ""{
-            Alert.present(
-                title: AppAlertTitle.appName.rawValue,
-                message: AppSignInForgotSignUpAlertNessage.enterLCUnit,
-                actions: .ok(handler: {
-                }),
-                from: self
-            )
-        }
-        else if lessCaseQuantityTF.text?.trimmingCharacters(in: .whitespaces) == ""{
-            Alert.present(
-                title: AppAlertTitle.appName.rawValue,
-                message: AppSignInForgotSignUpAlertNessage.enterLCQuantity,
-                actions: .ok(handler: {
-                }),
-                from: self
-            )
-        }
+//        else if lessCaseUnitTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+//            Alert.present(
+//                title: AppAlertTitle.appName.rawValue,
+//                message: AppSignInForgotSignUpAlertNessage.enterLCUnit,
+//                actions: .ok(handler: {
+//                }),
+//                from: self
+//            )
+//        }
+//        else if lessCaseQuantityTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+//            Alert.present(
+//                title: AppAlertTitle.appName.rawValue,
+//                message: AppSignInForgotSignUpAlertNessage.enterLCQuantity,
+//                actions: .ok(handler: {
+//                }),
+//                from: self
+//            )
+//        }
         else if mappingUnitTF.text?.trimmingCharacters(in: .whitespaces) == ""{
             Alert.present(
                 title: AppAlertTitle.appName.rawValue,
