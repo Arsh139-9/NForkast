@@ -32,6 +32,7 @@ class ProductMappingVC: UIViewController {
     var productRespArray = [[String:AnyHashable]]()
     var ingredientRespArray = [[String:AnyHashable]]()
     var unitListArr = [[String:Any]]()
+    var uOMDetailArr = [[String:Any]]()
 
     var addIngredientArray = [[String:AnyHashable]]()
     override func viewDidLoad() {

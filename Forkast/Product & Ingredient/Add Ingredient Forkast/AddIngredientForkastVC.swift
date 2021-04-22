@@ -40,6 +40,10 @@ class AddIngredientForkastVC: UIViewController {
     
     @IBOutlet weak var popUpTypeLbl: UILabel!
     var unitListArr = [[String:Any]]()
+    var fullCaseUnitArr = [[String:Any]]()
+    var lessCaseUnitArr = [[String:Any]]()
+    var mappingCaseUnitArr = [[String:Any]]()
+
     var selected = 0
     var isFCase = -1
     var isLCase = -1
@@ -281,22 +285,40 @@ extension AddIngredientForkastVC:UITableViewDataSource,UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return unitListArr.count
+        if selected == 1{
+            return fullCaseUnitArr.count
+        }
+        else if selected == 2{
+            return lessCaseUnitArr.count
+
+        }else if selected == 3{
+            return mappingCaseUnitArr.count
+        }else{
+            return unitListArr.count
+
+        }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! AddIngredientPopUpTBCell
         var item = [String:Any]()
-            item = unitListArr[indexPath.row]
-       
-        cell.popUpItemLbl.text = item["unit"] as? String ?? ""
+            
         if selected == 1{
             cell.checkUncheckImgView.image = isFCase == indexPath.row ? #imageLiteral(resourceName: "checkImg") : #imageLiteral(resourceName: "uncheckImg")
+            item = fullCaseUnitArr[indexPath.row]
+            
+             cell.popUpItemLbl.text = item["unit"] as? String ?? ""
         }else if selected == 2{
             cell.checkUncheckImgView.image = isLCase == indexPath.row ? #imageLiteral(resourceName: "checkImg") : #imageLiteral(resourceName: "uncheckImg")
+            item = lessCaseUnitArr[indexPath.row]
+            
+             cell.popUpItemLbl.text = item["unit"] as? String ?? ""
         }else if selected == 3{
             cell.checkUncheckImgView.image = isMCase == indexPath.row ? #imageLiteral(resourceName: "checkImg") : #imageLiteral(resourceName: "uncheckImg")
+            item = mappingCaseUnitArr[indexPath.row]
+            
+             cell.popUpItemLbl.text = item["unit"] as? String ?? ""
         }
 
         return cell
@@ -311,15 +333,15 @@ extension AddIngredientForkastVC:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selected == 1{
             isFCase = indexPath.row
-            fullCaseUnitTF.text = self.unitListArr[indexPath.row]["unit"] as? String ?? ""
+            fullCaseUnitTF.text = self.fullCaseUnitArr[indexPath.row]["unit"] as? String ?? ""
             
         }else if selected == 2{
             isLCase = indexPath.row
-            lessCaseUnitTF.text = self.unitListArr[indexPath.row]["unit"] as? String ?? ""
+            lessCaseUnitTF.text = self.lessCaseUnitArr[indexPath.row]["unit"] as? String ?? ""
         }
         else if selected == 3{
             isMCase = indexPath.row
-            mappingUnitTF.text = self.unitListArr[indexPath.row]["unit"] as? String ?? ""
+            mappingUnitTF.text = self.mappingCaseUnitArr[indexPath.row]["unit"] as? String ?? ""
         }
         self.popUpTBView.reloadData()
         popUpView.isHidden = true

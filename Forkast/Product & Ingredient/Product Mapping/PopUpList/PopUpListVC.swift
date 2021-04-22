@@ -94,7 +94,7 @@ class PopUpListVC: UIViewController {
                                  
 //                                    self.vendorListArr = addProductDataResp?.vendorDetailArr ?? [[:]]
 //                                    self.categoryListArr = addProductDataResp?.categoryDetailArr ?? [[:]]
-                                    let unitArr = addProductDataResp?.unitDetailArr ?? [[:]]
+                                    let unitArr = addProductDataResp?.uOMDetailArr ?? [[:]]
                                     for i in 0..<unitArr.count{
                                         self.unitListArr.append(unitArr[i])
                                     }

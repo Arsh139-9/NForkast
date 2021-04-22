@@ -1170,10 +1170,10 @@
 				CODE_SIGN_ENTITLEMENTS = Forkast/Forkast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.27;
+				CURRENT_PROJECT_VERSION = 1.29;
 				DEVELOPMENT_TEAM = NXRYLUFNHX;
 				INFOPLIST_FILE = Forkast/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1196,10 +1196,10 @@
 				CODE_SIGN_ENTITLEMENTS = Forkast/Forkast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.27;
+				CURRENT_PROJECT_VERSION = 1.29;
 				DEVELOPMENT_TEAM = NXRYLUFNHX;
 				INFOPLIST_FILE = Forkast/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

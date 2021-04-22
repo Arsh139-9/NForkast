@@ -32,6 +32,9 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
     var vendorListArr = [[String:Any]]()
     var categoryListArr = [[String:Any]]()
     var unitListArr = [[String:Any]]()
+    var fullCaseUnitArr = [[String:Any]]()
+    var lessCaseUnitArr = [[String:Any]]()
+    var mappingCaseUnitArr = [[String:Any]]()
     var isCategory = false
     var isPar = false
     var chossenImage = UIImage()
@@ -342,6 +345,10 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
                 }
                 CMDVC?.base64 = base64
                 CMDVC?.unitListArr = self.unitListArr
+                CMDVC?.lessCaseUnitArr = self.lessCaseUnitArr
+                CMDVC?.fullCaseUnitArr = self.fullCaseUnitArr
+                CMDVC?.mappingCaseUnitArr = self.mappingCaseUnitArr
+
                 if let CMDVC = CMDVC {
                     self.navigationController?.pushViewController(CMDVC, animated: true)
                 }

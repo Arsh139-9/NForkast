@@ -9,7 +9,9 @@ import UIKit
 import IQKeyboardManagerSwift
 
 @available(iOS 13.0, *)
-@main
+@UIApplicationMain
+
+//@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
      var window: UIWindow?

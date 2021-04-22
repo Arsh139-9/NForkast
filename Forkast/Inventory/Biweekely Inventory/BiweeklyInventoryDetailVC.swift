@@ -149,7 +149,13 @@ extension BiweeklyInventoryDetailVC:UITableViewDataSource,UITableViewDelegate{
         let respDict = responseArray[indexPath.row]
         cell?.biWeeklyInventoryNameLbl.text = respDict["name"] as? String ?? ""
         cell?.biIngredientNameLbl.text = respDict["category"] as? String ?? ""
-        cell?.biCaseLbl.text = respDict["mapping_unit"] as? String ?? ""
+        let inventoryCount = respDict["inventory_count"] as? String ?? ""
+        if inventoryCount == "1"{
+            cell?.biCaseLbl.text = respDict["full_unit"] as? String ?? ""
+        }else if inventoryCount == "2"{
+            cell?.biCaseLbl.text = respDict["less_unit"] as? String ?? ""
+        }
+        
         cell?.biQuantityTF.text = respDict["total_quantity"] as? String ?? ""
         cell?.biQuantityTF.placeholder = ""
         var sPhotoStr = respDict["image"] as? String ?? ""

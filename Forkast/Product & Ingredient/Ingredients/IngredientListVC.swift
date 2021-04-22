@@ -13,6 +13,11 @@ class IngredientListVC: UIViewController {
     var vendorListArr = [[String:Any]]()
     var categoryListArr = [[String:Any]]()
     var unitListArr = [[String:Any]]()
+    var fullCaseUnitArr = [[String:Any]]()
+    var lessCaseUnitArr = [[String:Any]]()
+    var mappingCaseUnitArr = [[String:Any]]()
+    var uOMCaseUnitArr = [[String:Any]]()
+
     var loaderBool = Bool()
     var page = Int()
     var lastPage = Bool()
@@ -49,6 +54,10 @@ class IngredientListVC: UIViewController {
                                     self.vendorListArr = addProductDataResp?.vendorDetailArr ?? [[:]]
                                     self.categoryListArr = addProductDataResp?.categoryDetailArr ?? [[:]]
                                     self.unitListArr = addProductDataResp?.unitDetailArr ?? [[:]]
+                                    self.fullCaseUnitArr = addProductDataResp?.fullCaseUnitDetailArr ?? [[:]]
+                                    self.lessCaseUnitArr = addProductDataResp?.lessCaseUnitDetailArr ?? [[:]]
+                                    self.mappingCaseUnitArr = addProductDataResp?.mappingDetailArr ?? [[:]]
+                                    self.uOMCaseUnitArr = addProductDataResp?.uOMDetailArr ?? [[:]]
                                     for obj in self.unitListArr{
                                      
                                       
@@ -71,7 +80,26 @@ class IngredientListVC: UIViewController {
                                         respDict["check"] = false
 
                                     }
-                                    
+                                    for obj in self.fullCaseUnitArr{
+                                        var respDict = obj
+                                        respDict["check"] = false
+
+                                    }
+                                    for obj in self.lessCaseUnitArr{
+                                        var respDict = obj
+                                        respDict["check"] = false
+
+                                    }
+                                    for obj in self.mappingCaseUnitArr{
+                                        var respDict = obj
+                                        respDict["check"] = false
+
+                                    }
+                                    for obj in self.uOMCaseUnitArr{
+                                                                           var respDict = obj
+                                                                           respDict["check"] = false
+
+                                                                       }
                                     
                                 }else{
 //                                    DispatchQueue.main.async {
@@ -126,6 +154,12 @@ class IngredientListVC: UIViewController {
         CMDVC?.vendorListArr = vendorListArr
         CMDVC?.categoryListArr = categoryListArr
         CMDVC?.unitListArr = unitListArr
+     
+        CMDVC?.fullCaseUnitArr = fullCaseUnitArr
+        CMDVC?.lessCaseUnitArr = lessCaseUnitArr
+        CMDVC?.mappingCaseUnitArr = mappingCaseUnitArr
+
+        
         CMDVC?.delegate = self
         if let CMDVC = CMDVC {
             self.navigationController?.pushViewController(CMDVC, animated: true)
