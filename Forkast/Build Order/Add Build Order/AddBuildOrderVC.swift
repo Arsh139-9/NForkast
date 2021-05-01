@@ -12,7 +12,7 @@ import SDWebImage
 protocol SendingAddBOToBOMainPageDelegateProtocol {
     func sendDataToBO(myData: Bool)
 }
-class AddBuildOrderVC: UIViewController {
+class AddBuildOrderVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var salesPriceLbl: UILabel!
     
@@ -136,6 +136,20 @@ class AddBuildOrderVC: UIViewController {
                 }
             }
         
+    }
+    @objc func textFieldDidChange(theTextField:UITextField){
+        var parentCell = theTextField.superview
+
+        while !(parentCell is AddBuildOrderTBCell) {
+            parentCell = parentCell?.superview
+        }
+        var indexPath: IndexPath? = nil
+        let cell1 = parentCell as? AddBuildOrderTBCell
+        indexPath = addBuildOrderTBView.indexPath(for: cell1!)
+        if theTextField.text != ""{
+            responseArray[indexPath!.row]["orderQuantity"] = theTextField.text
+        }
+       
     }
     @objc func increaseQuantity(_ sender: UIButton?) {
         var parentCell = sender?.superview
@@ -343,6 +357,9 @@ extension AddBuildOrderVC:UITableViewDataSource,UITableViewDelegate{
             }
         }
         cell?.buildOrderQuantityTF.text = respDict["orderQuantity"] as? String ?? ""
+        cell?.buildOrderQuantityTF.delegate = self
+        cell?.buildOrderQuantityTF.addTarget(self, action: #selector(textFieldDidChange(theTextField:)), for: .editingChanged)
+        
 //        cell?.buildorder.text = respDict["theoreticalValue"] as? String ?? ""
         cell?.increaseQuantityBtn?.addTarget(self, action: #selector(increaseQuantity(_:)), for: .touchUpInside)
         cell?.decreaseQuantityBtn?.addTarget(self, action: #selector(decreaseQuantity(_:)), for: .touchUpInside)

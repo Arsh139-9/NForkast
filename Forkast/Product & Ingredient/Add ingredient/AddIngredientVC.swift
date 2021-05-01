@@ -387,24 +387,24 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
                     from: self
                 )
             }
-            else if lessCaseUnitTF.text?.trimmingCharacters(in: .whitespaces) == ""{
-                Alert.present(
-                    title: AppAlertTitle.appName.rawValue,
-                    message: AppSignInForgotSignUpAlertNessage.enterLCUnit,
-                    actions: .ok(handler: {
-                    }),
-                    from: self
-                )
-            }
-            else if lessCasePriceTF.text?.trimmingCharacters(in: .whitespaces) == ""{
-                Alert.present(
-                    title: AppAlertTitle.appName.rawValue,
-                    message: AppSignInForgotSignUpAlertNessage.enterLCQuantity,
-                    actions: .ok(handler: {
-                    }),
-                    from: self
-                )
-            }
+//            else if lessCaseUnitTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+//                Alert.present(
+//                    title: AppAlertTitle.appName.rawValue,
+//                    message: AppSignInForgotSignUpAlertNessage.enterLCUnit,
+//                    actions: .ok(handler: {
+//                    }),
+//                    from: self
+//                )
+//            }
+//            else if lessCasePriceTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+//                Alert.present(
+//                    title: AppAlertTitle.appName.rawValue,
+//                    message: AppSignInForgotSignUpAlertNessage.enterLCQuantity,
+//                    actions: .ok(handler: {
+//                    }),
+//                    from: self
+//                )
+//            }
             
             else{
                 addParForekstIngredientApi(inventoryMethod:"1")

@@ -31,6 +31,7 @@ struct WSMethods {
     static let addIngredient = "AddIngredient.php"
     static let addIngredientProductDetail = "AddIngredientProductDetail.php"
     static let addMaping = "AddMaping.php"
+    static let matchMappingUnit = "MatchMappingUnit.php"
     static let getAllBuildOrderDetail = "GetAllBuildOrderDetail.php"
     static let addBuildOrder = "AddBuildOrder.php"
     static let getNotificationDetailById = "GetNotificationDetailById.php"
