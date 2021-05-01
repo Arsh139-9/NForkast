@@ -53,7 +53,7 @@ class AddIngredientForkastVC: UIViewController {
     var category = String()
     var parValue = String()
     var base64 = String()
-
+var mappingUnitId = String()
     
 
     
@@ -113,7 +113,7 @@ class AddIngredientForkastVC: UIViewController {
         //    let paramds = ["userId": userIds,"name":ingredientNameTF.text ?? "","vendor": preferredVendorTF.text ?? "","category":categoryTF.text ?? "","inventory_method":inventoryMethod,"parValue":parTF.text ?? "","image":"","ingredientId":""] as [String : Any]
         let userIds = getSAppDefault(key: "UserId") as? String ?? ""
 
-        let paramds = ["userId": userIds,"name":ingredientName,"vendor":preferredVendor,"category":category,"inventory_method":"2","parValue":parValue,"image":base64,"ingredientId": "","full_unit":fullCaseUnitTF.text ?? "","full_price": fullCasePriceTF.text ?? "","less_unit":lessCaseUnitTF.text ?? "","less_quantity":lessCaseQuantityTF.text ?? "","inventory_count":inventoryCount,"mapping_unit":mappingUnitTF.text ?? "","mapping_unit_case":mappingUnitCaseTF.text ?? "","waste_factor":mappingWastePercentTF.text ?? ""] as [String : Any]
+        let paramds = ["userId": userIds,"name":ingredientName,"vendor":preferredVendor,"category":category,"inventory_method":"2","parValue":parValue,"image":base64,"ingredientId": "","full_unit":fullCaseUnitTF.text ?? "","full_price": fullCasePriceTF.text ?? "","less_unit":lessCaseUnitTF.text ?? "","less_quantity":lessCaseQuantityTF.text ?? "","inventory_count":inventoryCount,"mapping_unit":mappingUnitId,"mapping_unit_case":mappingUnitCaseTF.text ?? "","waste_factor":mappingWastePercentTF.text ?? ""] as [String : Any]
 
         let strURL = kBASEURL + WSMethods.addIngredient
 
@@ -342,6 +342,7 @@ extension AddIngredientForkastVC:UITableViewDataSource,UITableViewDelegate{
         else if selected == 3{
             isMCase = indexPath.row
             mappingUnitTF.text = self.mappingCaseUnitArr[indexPath.row]["unit"] as? String ?? ""
+            mappingUnitId = self.mappingCaseUnitArr[indexPath.row]["id"] as? String ?? ""
         }
         self.popUpTBView.reloadData()
         popUpView.isHidden = true

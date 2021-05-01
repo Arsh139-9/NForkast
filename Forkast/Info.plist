@@ -86,5 +86,7 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for &quot;some reason&quot;!</string>
 </dict>
 </plist>

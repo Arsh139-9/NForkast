@@ -105,11 +105,14 @@ class ProductMappingVC: UIViewController {
         else{
             let ingredientID = getSAppDefault(key: "ingredientId") as? String ?? ""
              let ingredientName = getSAppDefault(key: "IName") as? String ?? ""
+            let uOMId = getSAppDefault(key: "unitId") as? String ?? ""
              let dict = [
                  "name":ingredientName,
                  "ingredientId":ingredientID,
                  "quantity":popUpQuantityTF.text ?? "",
-                 "UOM":popUpUOMTF.text ?? "",
+                //UOM id in string
+                
+                 "UOM":uOMId,
                  "waste_factor":popUpWastingFactorTf.text ?? ""
              ]
              addIngredientArray.append(dict)
@@ -229,6 +232,8 @@ class ProductMappingVC: UIViewController {
                                     title: AppAlertTitle.appName.rawValue,
                                     message: addProductDataResp?.message ?? "",
                                     actions: .ok(handler: {
+                                        self.addIngredientArray.removeAll()
+                                        self.addedIngredientTBView.reloadData()
                                     }),
                                     from: self
                                 )
