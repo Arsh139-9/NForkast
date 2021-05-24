@@ -48,8 +48,14 @@ class AddBuildOrderVC: UIViewController, UITextFieldDelegate {
             case .moved: break
                 // handle drag moved
             case .ended:
-                totalSale = "\(Int(slider.value))"
-                salesPriceLbl.text = "$\(Int(slider.value)) Sales"
+                let bigNumber = slider.value
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                guard let formattedNumber = numberFormatter.string(from: NSNumber(value: bigNumber)) else { return }
+                print(formattedNumber)
+                salesPriceLbl.text = "$\(formattedNumber) Sales"
+                totalSale = "\(formattedNumber)"
+
                 getBuildOrderDetail(buildId:"", sliderVal: (Int(slider.value)))
                 // handle drag ended
             default:

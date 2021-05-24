@@ -23,6 +23,9 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileImg" translatesAutoresizingMaskIntoConstraints="NO" id="lBB-Tl-yeT">
                         <rect key="frame" x="13" y="21" width="89.5" height="113"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="113" id="3ft-er-JvV"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="9"/>
@@ -148,7 +151,6 @@
                 <constraint firstItem="lBB-Tl-yeT" firstAttribute="width" secondItem="VGA-Xx-lcs" secondAttribute="width" multiplier="0.19" id="9HK-5i-1Fo"/>
                 <constraint firstItem="Ztb-0S-KsD" firstAttribute="width" secondItem="VGA-Xx-lcs" secondAttribute="width" multiplier="0.13" id="SVf-Rv-6Mz"/>
                 <constraint firstItem="Pp4-fJ-U7j" firstAttribute="height" secondItem="VGA-Xx-lcs" secondAttribute="height" multiplier="0.27" id="mSe-Bq-fcC"/>
-                <constraint firstItem="lBB-Tl-yeT" firstAttribute="height" secondItem="VGA-Xx-lcs" secondAttribute="height" multiplier="0.73" id="scP-OG-ubm"/>
             </constraints>
             <connections>
                 <outlet property="buildOrderCaseLbl" destination="qPL-d3-hsT" id="HUH-B3-31d"/>

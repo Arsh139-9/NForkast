@@ -388,5 +388,117 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36CC9764-26D5-46B9-8BAC-8D4C1BEC3A12"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Forkast/Product &amp; Ingredient/Product Mapping/ProductMappingVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "saveIngredientMappingBtnAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B05EBEFC-70DF-45A8-BD60-B1108D541C92"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Forkast/Product &amp; Ingredient/Product Mapping/ProductMappingVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "saveIngredientMappingBtnAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F06A6285-955C-4188-9759-A3E87B2D8EE2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Forkast/Product &amp; Ingredient/Product Mapping/ProductMappingVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "saveUnitCheckApi(ingredientId:uOMId:ingredientName:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F06A6285-955C-4188-9759-A3E87B2D8EE2 - d382e0c2905a29b1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in Forkast.ProductMappingVC.saveUnitCheckApi(ingredientId: Swift.String, uOMId: Swift.String, ingredientName: Swift.String) -&gt; ()"
+                  moduleName = "Forkast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arshdeepsingh/Desktop/Office%20Work/NForkast-main/Forkast/Product%20&amp;%20Ingredient/Product%20Mapping/ProductMappingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "3072">
+               </Location>
+               <Location
+                  uuid = "F06A6285-955C-4188-9759-A3E87B2D8EE2 - 743ed590b8a867b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (Alamofire.DataResponse&lt;Any, Alamofire.AFError&gt;) -&gt; () in Forkast.ProductMappingVC.saveUnitCheckApi(ingredientId: Swift.String, uOMId: Swift.String, ingredientName: Swift.String) -&gt; ()"
+                  moduleName = "Forkast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/arshdeepsingh/Desktop/Office%20Work/NForkast-main/Forkast/Product%20&amp;%20Ingredient/Product%20Mapping/ProductMappingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "237"
+                  endingLineNumber = "237"
+                  offsetFromSymbolStart = "132">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F1E1003-2B0C-4EDF-B3A7-C56C0CC2A4B1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Forkast/Product &amp; Ingredient/Product Mapping/ProductMappingVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "saveUnitCheckApi(ingredientId:uOMId:ingredientName:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "457A9C67-59ED-4388-8BEA-1E6669EE22FE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Forkast/Product &amp; Ingredient/Product Mapping/ProductMappingVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "saveProductMappingApi()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
