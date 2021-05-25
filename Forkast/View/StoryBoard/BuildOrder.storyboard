@@ -441,10 +441,10 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEu-Sg-xph">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="712.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="713"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$16,000 Sales" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekq-sx-h91">
-                                                <rect key="frame" x="122.5" y="19" width="130.5" height="25.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekq-sx-h91">
+                                                <rect key="frame" x="138" y="19.5" width="16.5" height="25.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -452,13 +452,32 @@
                                                     <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="23"/>
                                                 </variation>
                                             </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="16,000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f03-O9-dNl" customClass="PaddingTextField" customModule="Forkast" customModuleProvider="target">
+                                                <rect key="frame" x="154.5" y="19" width="66" height="26"/>
+                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="23"/>
+                                                </variation>
+                                            </textField>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="16000" minValue="500" maxValue="30000" translatesAutoresizingMaskIntoConstraints="NO" id="sCT-KP-KF7">
-                                                <rect key="frame" x="17" y="55.5" width="327" height="31"/>
+                                                <rect key="frame" x="17" y="56" width="327" height="31"/>
                                                 <color key="tintColor" red="0.24994018670000001" green="0.62443900109999995" blue="0.1057265475" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="maximumTrackTintColor" red="0.85914760830000003" green="0.85926860569999997" blue="0.85910946129999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </slider>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="17C-kN-DD4">
-                                                <rect key="frame" x="0.0" y="96.5" width="375" height="300"/>
+                                                <rect key="frame" x="0.0" y="97" width="375" height="300"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="ciY-c7-56L"/>
@@ -469,7 +488,7 @@
                                                 </connections>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-G3-Cn6">
-                                                <rect key="frame" x="19" y="415.5" width="82.5" height="24"/>
+                                                <rect key="frame" x="19" y="416" width="82.5" height="24"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -478,7 +497,7 @@
                                                 </variation>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XTD-ai-CeT" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
-                                                <rect key="frame" x="19" y="458.5" width="337" height="119"/>
+                                                <rect key="frame" x="19" y="459" width="337" height="119"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="119" id="0Lu-iq-Dzp"/>
@@ -503,7 +522,7 @@
                                                 </variation>
                                             </textView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="QaM-xs-lwc">
-                                                <rect key="frame" x="19" y="596.5" width="337" height="96"/>
+                                                <rect key="frame" x="19" y="597" width="337" height="96"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32t-C4-d8j">
                                                         <rect key="frame" x="0.0" y="0.0" width="337" height="41.5"/>
@@ -524,24 +543,37 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sales" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSa-6p-sZP">
+                                                <rect key="frame" x="220.5" y="19.5" width="48.5" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="23"/>
+                                                </variation>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="kSa-6p-sZP" firstAttribute="leading" secondItem="f03-O9-dNl" secondAttribute="trailing" id="0Cb-jM-zpa"/>
                                             <constraint firstItem="XTD-ai-CeT" firstAttribute="top" secondItem="nQE-G3-Cn6" secondAttribute="bottom" constant="19" id="3vf-Pl-BoX"/>
                                             <constraint firstItem="QaM-xs-lwc" firstAttribute="trailing" secondItem="XTD-ai-CeT" secondAttribute="trailing" id="4A2-6w-dW1"/>
-                                            <constraint firstItem="sCT-KP-KF7" firstAttribute="top" secondItem="Ekq-sx-h91" secondAttribute="bottom" constant="11" id="4JP-Cr-fIC"/>
                                             <constraint firstItem="nQE-G3-Cn6" firstAttribute="top" secondItem="17C-kN-DD4" secondAttribute="bottom" constant="19" id="5Ib-Yk-En2"/>
                                             <constraint firstItem="17C-kN-DD4" firstAttribute="top" secondItem="sCT-KP-KF7" secondAttribute="bottom" constant="11" id="8zZ-hN-XXY"/>
                                             <constraint firstAttribute="bottom" secondItem="QaM-xs-lwc" secondAttribute="bottom" constant="20" id="9dM-vT-Lfk"/>
                                             <constraint firstItem="XTD-ai-CeT" firstAttribute="leading" secondItem="nQE-G3-Cn6" secondAttribute="leading" id="9iw-4b-5eL"/>
                                             <constraint firstAttribute="trailing" secondItem="17C-kN-DD4" secondAttribute="trailing" id="9zz-0U-K5X"/>
+                                            <constraint firstItem="f03-O9-dNl" firstAttribute="centerX" secondItem="fEu-Sg-xph" secondAttribute="centerX" id="CUC-UN-jiY"/>
                                             <constraint firstItem="nQE-G3-Cn6" firstAttribute="leading" secondItem="fEu-Sg-xph" secondAttribute="leading" constant="19" id="EHF-VJ-5Mw"/>
                                             <constraint firstItem="QaM-xs-lwc" firstAttribute="top" secondItem="XTD-ai-CeT" secondAttribute="bottom" constant="19" id="G4Q-cD-fXM"/>
                                             <constraint firstAttribute="trailing" secondItem="XTD-ai-CeT" secondAttribute="trailing" constant="19" id="HqB-ku-665"/>
+                                            <constraint firstItem="f03-O9-dNl" firstAttribute="leading" secondItem="Ekq-sx-h91" secondAttribute="trailing" id="JMA-6Q-oyM"/>
+                                            <constraint firstItem="Ekq-sx-h91" firstAttribute="centerY" secondItem="f03-O9-dNl" secondAttribute="centerY" id="KXg-4Z-IGt"/>
                                             <constraint firstItem="17C-kN-DD4" firstAttribute="leading" secondItem="fEu-Sg-xph" secondAttribute="leading" id="Kz0-pL-Kj1"/>
-                                            <constraint firstItem="Ekq-sx-h91" firstAttribute="centerX" secondItem="fEu-Sg-xph" secondAttribute="centerX" id="Tcw-OM-Qws"/>
+                                            <constraint firstItem="kSa-6p-sZP" firstAttribute="centerY" secondItem="f03-O9-dNl" secondAttribute="centerY" id="Tsd-Mg-eIq"/>
+                                            <constraint firstItem="sCT-KP-KF7" firstAttribute="top" secondItem="f03-O9-dNl" secondAttribute="bottom" constant="11" id="csw-kh-Jym"/>
                                             <constraint firstItem="QaM-xs-lwc" firstAttribute="leading" secondItem="XTD-ai-CeT" secondAttribute="leading" id="jVu-RO-0Bz"/>
-                                            <constraint firstItem="Ekq-sx-h91" firstAttribute="top" secondItem="fEu-Sg-xph" secondAttribute="top" constant="19" id="t8I-Xn-TPE"/>
+                                            <constraint firstItem="f03-O9-dNl" firstAttribute="top" secondItem="fEu-Sg-xph" secondAttribute="top" constant="19" id="qDi-Nl-5nx"/>
                                             <constraint firstAttribute="trailing" secondItem="sCT-KP-KF7" secondAttribute="trailing" constant="33" id="tRR-Dz-eQ9"/>
                                         </constraints>
                                     </view>
@@ -577,12 +609,12 @@
                         <outlet property="buildOrderTBHeightConstraint" destination="ciY-c7-56L" id="WVf-u5-Tjh"/>
                         <outlet property="commentTV" destination="XTD-ai-CeT" id="Wa0-5J-NvF"/>
                         <outlet property="saleSlider" destination="sCT-KP-KF7" id="IEb-mS-UQU"/>
-                        <outlet property="salesPriceLbl" destination="Ekq-sx-h91" id="EnJ-C1-M5V"/>
+                        <outlet property="salesPriceTF" destination="f03-O9-dNl" id="SDX-zu-aFt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gCT-sv-ko4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="847" y="155"/>
+            <point key="canvasLocation" x="845.60000000000002" y="154.27286356821591"/>
         </scene>
     </scenes>
     <resources>

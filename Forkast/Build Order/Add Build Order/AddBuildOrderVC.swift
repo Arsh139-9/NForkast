@@ -12,10 +12,10 @@ import SDWebImage
 protocol SendingAddBOToBOMainPageDelegateProtocol {
     func sendDataToBO(myData: Bool)
 }
-class AddBuildOrderVC: UIViewController, UITextFieldDelegate {
+class AddBuildOrderVC: UIViewController,UITextFieldDelegate{
 
-    @IBOutlet weak var salesPriceLbl: UILabel!
     
+    @IBOutlet weak var salesPriceTF: UITextField!
     @IBOutlet weak var saleSlider: UISlider!
     var responseArray = [[String:Any]]()
     @IBOutlet weak var buildOrderTBHeightConstraint: NSLayoutConstraint!
@@ -29,6 +29,22 @@ class AddBuildOrderVC: UIViewController, UITextFieldDelegate {
     var totalSale = String()
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let prefix = UILabel()
+//        prefix.text = "$"
+//        // set font, color etc.
+//        prefix.textAlignment = .right
+//        prefix.font = UIFont(name: "Lato-Bold", size: 21.0)
+//        prefix.sizeToFit()
+//        salesPriceTF.leftView = prefix
+//        salesPriceTF.leftViewMode = .always // or .always
+//        let suffix = UILabel()
+//        suffix.text = "Sales"
+//        // set font, color etc.
+//        suffix.textAlignment = .left
+//        suffix.font = UIFont(name: "Lato-Bold", size: 21.0)
+//        suffix.sizeToFit()
+//        salesPriceTF.rightView = suffix
+//        salesPriceTF.rightViewMode = .always // or .always
         commentTV.textContainerInset = UIEdgeInsets(top: 13, left: 13, bottom: 13, right: 13)
         addBuildOrderTBView.tableFooterView = UIView()
         addBuildOrderTBView.estimatedRowHeight = 90
@@ -37,9 +53,17 @@ class AddBuildOrderVC: UIViewController, UITextFieldDelegate {
         saleSlider.value = 16000
         totalSale = "16000"
         getBuildOrderDetail(buildId:"", sliderVal:16000)
-
+        salesPriceTF.delegate = self
+        salesPriceTF.addTarget(self, action: #selector(sLtextFieldDidChange(theTextField:)), for: .editingChanged)
         // Do any additional setup after loading the view.
     }
+    @objc func sLtextFieldDidChange(theTextField:UITextField){
+        if salesPriceTF.text != ""{
+            saleSlider.value = (salesPriceTF.text! as NSString).floatValue
+        }
+        getBuildOrderDetail(buildId:"", sliderVal:(salesPriceTF.text! as NSString).integerValue)
+    }
+    
     @objc func onSliderValChanged(slider: UISlider, event: UIEvent) {
         if let touchEvent = event.allTouches?.first {
             switch touchEvent.phase {
@@ -53,7 +77,7 @@ class AddBuildOrderVC: UIViewController, UITextFieldDelegate {
                 numberFormatter.numberStyle = .decimal
                 guard let formattedNumber = numberFormatter.string(from: NSNumber(value: bigNumber)) else { return }
                 print(formattedNumber)
-                salesPriceLbl.text = "$\(formattedNumber) Sales"
+                salesPriceTF.text = "\(formattedNumber)"
                 totalSale = "\(formattedNumber)"
 
                 getBuildOrderDetail(buildId:"", sliderVal: (Int(slider.value)))
@@ -319,7 +343,7 @@ class AddBuildOrderVC: UIViewController, UITextFieldDelegate {
     @IBAction func clearValuesBtnAction(_ sender: Any) {
         saleSlider.value = 16000
         getBuildOrderDetail(buildId:"", sliderVal:16000)
-        salesPriceLbl.text = "$\(Int(saleSlider.value)) Sales"
+        salesPriceTF.text = "\(Int(saleSlider.value))"
 
 //        saveBuildOrderApi(isSave: "", isClear: "1")
 
@@ -392,3 +416,4 @@ extension AddBuildOrderVC:UITableViewDataSource,UITableViewDelegate{
        
     }
 }
+
