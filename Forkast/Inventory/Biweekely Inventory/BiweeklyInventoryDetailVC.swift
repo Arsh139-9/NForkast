@@ -161,7 +161,9 @@ extension BiweeklyInventoryDetailVC:UITableViewDataSource,UITableViewDelegate{
         var sPhotoStr = respDict["image"] as? String ?? ""
         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
         if sPhotoStr != ""{
-            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:nil)
+            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:UIImage(named: "inventoryPlaceholderImg"))
+        }else{
+            cell?.biweeklyProfileImg.image = UIImage(named: "inventoryPlaceholderImg")
         }
         cell?.increaseQuantityBtn.isHidden = true
         cell?.decreaseQuantityBtn.isHidden = true
