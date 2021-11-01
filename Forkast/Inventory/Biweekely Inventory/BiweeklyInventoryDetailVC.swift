@@ -155,13 +155,15 @@ extension BiweeklyInventoryDetailVC:UITableViewDataSource,UITableViewDelegate{
         }else if inventoryCount == "2"{
             cell?.biCaseLbl.text = respDict["less_unit"] as? String ?? ""
         }
-        
+        cell?.biQuantityTF.isEnabled = false
         cell?.biQuantityTF.text = respDict["total_quantity"] as? String ?? ""
         cell?.biQuantityTF.placeholder = ""
         var sPhotoStr = respDict["image"] as? String ?? ""
         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
         if sPhotoStr != ""{
-            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:nil)
+            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:UIImage(named: "inventoryPlaceholderImg"))
+        }else{
+            cell?.biweeklyProfileImg.image = UIImage(named: "inventoryPlaceholderImg")
         }
         cell?.increaseQuantityBtn.isHidden = true
         cell?.decreaseQuantityBtn.isHidden = true

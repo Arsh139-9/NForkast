@@ -16,6 +16,13 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
     @IBOutlet weak var ingredientNameTF: UITextField!
     @IBOutlet weak var preferredVendorTF: UITextField!
     @IBOutlet weak var categoryTF: UITextField!
+    @IBOutlet weak var fullCaseUnitTF: UITextField!
+    @IBOutlet weak var lessCaseUnitTF: UITextField!
+
+    @IBOutlet weak var fullCasePriceTF: UITextField!
+    
+    @IBOutlet weak var lessCasePriceTF: UITextField!
+    
     @IBOutlet weak var parTF: UITextField!
     
     @IBOutlet weak var popUpTBView: UITableView!
@@ -24,23 +31,38 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
     
     @IBOutlet weak var popUpTypeLbl: UILabel!
     
+    @IBOutlet weak var parPopUpView: UIView!
+    
+    @IBOutlet weak var parPopUpHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var uncheckRadioBtn: UIButton!
     var delegate: SendingAddIngredientToIngMainPageDelegateProtocol? = nil
     @IBOutlet weak var ingredientImgView: UIImageView!
 
     @IBOutlet weak var checkedRadioBtn: UIButton!
+    
+    @IBOutlet weak var unchKRBtn: UIButton!
+    
+    @IBOutlet weak var cHKRBtn: UIButton!
+    
     var vendorListArr = [[String:Any]]()
     var categoryListArr = [[String:Any]]()
     var unitListArr = [[String:Any]]()
     var fullCaseUnitArr = [[String:Any]]()
     var lessCaseUnitArr = [[String:Any]]()
     var mappingCaseUnitArr = [[String:Any]]()
-    var isCategory = false
     var isPar = false
     var chossenImage = UIImage()
+    var selected = 0
+    var isFCase = -1
+    var isLCase = -1
+    var isPVCase = -1
+    var isCCase = -1
+    var inventoryCount = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.parPopUpHeightConstraint.constant = 0
+        self.parPopUpView.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
         self.popUpView.isHidden = true
     }
@@ -151,7 +173,26 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
             base64 = compressedData?.base64EncodedString(options: .lineLength64Characters) ?? ""
             debugPrint("base64------> \(base64)")
         }
-        let paramds = ["userId": userIds,"name":ingredientNameTF.text ?? "","vendor": preferredVendorTF.text ?? "","category":categoryTF.text ?? "","inventory_method":inventoryMethod,"parValue":parTF.text ?? "","image":base64,"ingredientId":""] as [String : Any]
+        
+//        {
+//                "name":"Meatballs123",
+//                "vendor":"SYSCO",
+//                "category":"MEATS",
+//                "inventory_method":"2",
+//                "parValue":"",
+//                "userId":"13",
+//                "image":"",
+//                "full_unit":"Case",
+//        "full_price":"80",
+//        "less_unit":"Bag",
+//        "less_quantity":"5",
+//        "inventory_count":"2",
+//        "mapping_unit":"Ounces",
+//        "mapping_unit_case":"480",
+//        "waste_factor":"5%",
+//        }
+        
+        let paramds = ["userId": userIds,"name":ingredientNameTF.text ?? "","vendor": preferredVendorTF.text ?? "","category":categoryTF.text ?? "","inventory_method":inventoryMethod,"inventory_count":inventoryCount,"full_unit":fullCaseUnitTF.text ?? "","full_price":fullCasePriceTF.text ?? "","less_unit":lessCaseUnitTF.text ?? "","less_quantity":lessCasePriceTF.text ?? "","parValue":parTF.text ?? "","image":base64,"ingredientId":"","mapping_unit":"","mapping_unit_case":"","waste_factor":""] as [String : Any]
         
         let strURL = kBASEURL + WSMethods.addIngredient
         
@@ -209,9 +250,24 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
             }
         
     }
+    @IBAction func selectFullCaseUnitBtnAction(_ sender: Any) {
+        selected = 1
+        popUpView.isHidden = false
+        popUpTypeLbl.text = "Full Case"
+        popUpTBView.reloadData()
+        self.view.endEditing(true)
+    }
     
+    @IBAction func selectLessCaseUnitBtnAction(_ sender: Any) {
+        selected = 2
+        popUpView.isHidden = false
+        popUpTypeLbl.text = "Less Case"
+        popUpTBView.reloadData()
+        self.view.endEditing(true)
+
+    }
     @IBAction func selectPreferredVendorBtnAction(_ sender: Any) {
-        isCategory = false
+        selected = 3
         popUpView.isHidden = false
         popUpTypeLbl.text = "Vendor"
         popUpTBView.reloadData()
@@ -221,8 +277,8 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
     
     
     @IBAction func selectCategoryBtnAction(_ sender: Any) {
+        selected = 4
         popUpView.isHidden = false
-        isCategory = true
         popUpTypeLbl.text = "Category"
         popUpTBView.reloadData()
         self.view.endEditing(true)
@@ -235,6 +291,10 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
         parTF.isUserInteractionEnabled = true
         uncheckRadioBtn.setImage(UIImage(named: "checkRadioBtnImg"), for:UIControl.State.normal)
         checkedRadioBtn.setImage(UIImage(named: "unCheckRadioBtnImg"), for:UIControl.State.normal)
+        self.parPopUpHeightConstraint.constant = 667.0
+        self.parPopUpView.isHidden = false
+
+
     }
     
     @IBAction func checkRadioBtnAction(_ sender: UIButton) {
@@ -242,7 +302,9 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
         parTF.isUserInteractionEnabled = false
         uncheckRadioBtn.setImage(UIImage(named: "unCheckRadioBtnImg"), for:UIControl.State.normal)
         checkedRadioBtn.setImage(UIImage(named: "checkRadioBtnImg"), for:UIControl.State.normal)
-        
+        self.parPopUpHeightConstraint.constant = 0
+        self.parPopUpView.isHidden = true
+
     }
     
     @IBAction func popUpViewCrossBtnAction(_ sender: Any) {
@@ -254,6 +316,20 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
         }
         navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func unchekRadioBtnAction(_ sender: UIButton) {
+        inventoryCount = "2"
+        unchKRBtn.setImage(UIImage(named: "checkRadioBtnImg"), for:UIControl.State.normal)
+        cHKRBtn.setImage(UIImage(named: "unCheckRadioBtnImg"), for:UIControl.State.normal)
+    }
+    
+    @IBAction func chckRadioBtnAction(_ sender: UIButton) {
+        inventoryCount = "1"
+        unchKRBtn.setImage(UIImage(named: "unCheckRadioBtnImg"), for:UIControl.State.normal)
+        cHKRBtn.setImage(UIImage(named: "checkRadioBtnImg"), for:UIControl.State.normal)
+    
+    }
+
     
     @IBAction func saveParIngredientBtnAction(_ sender: Any) {
         if isPar == true{
@@ -292,7 +368,45 @@ class AddIngredientVC: UIViewController,UINavigationControllerDelegate,UIImagePi
                     }),
                     from: self
                 )
-            }else{
+            }
+           else if fullCaseUnitTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+                Alert.present(
+                    title: AppAlertTitle.appName.rawValue,
+                    message: AppSignInForgotSignUpAlertNessage.enterFCUnit,
+                    actions: .ok(handler: {
+                    }),
+                    from: self
+                )
+            }
+            else if fullCasePriceTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+                Alert.present(
+                    title: AppAlertTitle.appName.rawValue,
+                    message: AppSignInForgotSignUpAlertNessage.enterFCPrice,
+                    actions: .ok(handler: {
+                    }),
+                    from: self
+                )
+            }
+//            else if lessCaseUnitTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+//                Alert.present(
+//                    title: AppAlertTitle.appName.rawValue,
+//                    message: AppSignInForgotSignUpAlertNessage.enterLCUnit,
+//                    actions: .ok(handler: {
+//                    }),
+//                    from: self
+//                )
+//            }
+//            else if lessCasePriceTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+//                Alert.present(
+//                    title: AppAlertTitle.appName.rawValue,
+//                    message: AppSignInForgotSignUpAlertNessage.enterLCQuantity,
+//                    actions: .ok(handler: {
+//                    }),
+//                    from: self
+//                )
+//            }
+            
+            else{
                 addParForekstIngredientApi(inventoryMethod:"1")
             }
         }else{
@@ -364,10 +478,17 @@ extension AddIngredientVC:UITableViewDataSource,UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isCategory == true{
-            return categoryListArr.count
-        }else{
+        if selected == 1{
+            return fullCaseUnitArr.count
+        }
+        else if selected == 2{
+            return lessCaseUnitArr.count
+        }
+        else if selected == 3{
             return vendorListArr.count
+        }
+        else{
+            return categoryListArr.count
         }
     }
     
@@ -375,18 +496,32 @@ extension AddIngredientVC:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! AddIngredientPopUpTBCell
         var item = [String:Any]()
-        if isCategory == true{
-            item = categoryListArr[indexPath.row]
-        }else{
+        
+        if selected == 1{
+            cell.checkUncheckImgView.image = isFCase == indexPath.row ? #imageLiteral(resourceName: "checkImg") : #imageLiteral(resourceName: "uncheckImg")
+            item = fullCaseUnitArr[indexPath.row]
+            
+             cell.popUpItemLbl.text = item["unit"] as? String ?? ""
+        }else if selected == 2{
+            cell.checkUncheckImgView.image = isLCase == indexPath.row ? #imageLiteral(resourceName: "checkImg") : #imageLiteral(resourceName: "uncheckImg")
+            item = lessCaseUnitArr[indexPath.row]
+            
+             cell.popUpItemLbl.text = item["unit"] as? String ?? ""
+        }else if selected == 3{
+            cell.checkUncheckImgView.image = isPVCase == indexPath.row ? #imageLiteral(resourceName: "checkImg") : #imageLiteral(resourceName: "uncheckImg")
             item = vendorListArr[indexPath.row]
+            
+             cell.popUpItemLbl.text = item["name"] as? String ?? ""
+        }else if selected == 4{
+            cell.checkUncheckImgView.image = isCCase == indexPath.row ? #imageLiteral(resourceName: "checkImg") : #imageLiteral(resourceName: "uncheckImg")
+            item = categoryListArr[indexPath.row]
+            
+             cell.popUpItemLbl.text = item["name"] as? String ?? ""
         }
-        cell.popUpItemLbl.text = item["name"] as? String ?? ""
-        let checkUncheckStatus = item["check"] as? Bool ?? false
-        if checkUncheckStatus == true{
-            cell.checkUncheckImgView.image = #imageLiteral(resourceName: "checkImg")
-        }else{
-            cell.checkUncheckImgView.image = #imageLiteral(resourceName: "uncheckImg")
-        }
+        
+        
+     
+     
         //        tableView.layoutIfNeeded()
         //        tableView.estimatedRowHeight = UITableView.automaticDimension
         //        dailyInventoryTBHeightConstraint.constant = dailyInventoryDetailTBView.contentSize.height + 17
@@ -400,22 +535,26 @@ extension AddIngredientVC:UITableViewDataSource,UITableViewDelegate{
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isCategory == true{
-            for i in 0..<categoryListArr.count{
-                self.categoryListArr[i]["check"] = false
-            }
-            self.categoryListArr[indexPath.row]["check"] = true
-            categoryTF.text = self.categoryListArr[indexPath.row]["name"] as? String ?? ""
+        if selected == 1{
+            isFCase = indexPath.row
+            fullCaseUnitTF.text = self.fullCaseUnitArr[indexPath.row]["unit"] as? String ?? ""
             
-        }else{
-            for i in 0..<vendorListArr.count{
-                self.vendorListArr[i]["check"] = false
-            }
-            self.vendorListArr[indexPath.row]["check"] = true
+        }else if selected == 2{
+            isLCase = indexPath.row
+            lessCaseUnitTF.text = self.lessCaseUnitArr[indexPath.row]["unit"] as? String ?? ""
+        }
+        else if selected == 3{
+            isPVCase = indexPath.row
             preferredVendorTF.text = self.vendorListArr[indexPath.row]["name"] as? String ?? ""
+        }
+        else if selected == 4{
+            isCCase = indexPath.row
+            categoryTF.text = self.categoryListArr[indexPath.row]["name"] as? String ?? ""
         }
         self.popUpTBView.reloadData()
         popUpView.isHidden = true
+    
+        
         
     }
     

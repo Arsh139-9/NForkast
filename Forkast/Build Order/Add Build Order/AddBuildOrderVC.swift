@@ -12,10 +12,10 @@ import SDWebImage
 protocol SendingAddBOToBOMainPageDelegateProtocol {
     func sendDataToBO(myData: Bool)
 }
-class AddBuildOrderVC: UIViewController {
+class AddBuildOrderVC: UIViewController,UITextFieldDelegate{
 
-    @IBOutlet weak var salesPriceLbl: UILabel!
     
+    @IBOutlet weak var salesPriceTF: UITextField!
     @IBOutlet weak var saleSlider: UISlider!
     var responseArray = [[String:Any]]()
     @IBOutlet weak var buildOrderTBHeightConstraint: NSLayoutConstraint!
@@ -29,6 +29,22 @@ class AddBuildOrderVC: UIViewController {
     var totalSale = String()
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let prefix = UILabel()
+//        prefix.text = "$"
+//        // set font, color etc.
+//        prefix.textAlignment = .right
+//        prefix.font = UIFont(name: "Lato-Bold", size: 21.0)
+//        prefix.sizeToFit()
+//        salesPriceTF.leftView = prefix
+//        salesPriceTF.leftViewMode = .always // or .always
+//        let suffix = UILabel()
+//        suffix.text = "Sales"
+//        // set font, color etc.
+//        suffix.textAlignment = .left
+//        suffix.font = UIFont(name: "Lato-Bold", size: 21.0)
+//        suffix.sizeToFit()
+//        salesPriceTF.rightView = suffix
+//        salesPriceTF.rightViewMode = .always // or .always
         commentTV.textContainerInset = UIEdgeInsets(top: 13, left: 13, bottom: 13, right: 13)
         addBuildOrderTBView.tableFooterView = UIView()
         addBuildOrderTBView.estimatedRowHeight = 90
@@ -37,9 +53,50 @@ class AddBuildOrderVC: UIViewController {
         saleSlider.value = 16000
         totalSale = "16000"
         getBuildOrderDetail(buildId:"", sliderVal:16000)
-
+        salesPriceTF.delegate = self
+//        salesPriceTF.addTarget(self, action: #selector(sLtextFieldDidChange(theTextField:)), for: .editingChanged)
         // Do any additional setup after loading the view.
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textField.maxLength = 5
+         // Uses the number format corresponding to your Locale
+         let formatter = NumberFormatter()
+         formatter.numberStyle = .decimal
+         formatter.locale = Locale.current
+         formatter.maximumFractionDigits = 0
+
+
+        // Uses the grouping separator corresponding to your Locale
+        // e.g. "," in the US, a space in France, and so on
+        if let groupingSeparator = formatter.groupingSeparator {
+
+            if string == groupingSeparator {
+                return true
+            }
+
+
+            if let textWithoutGroupingSeparator = textField.text?.replacingOccurrences(of: groupingSeparator, with: "") {
+                var totalTextWithoutGroupingSeparators = textWithoutGroupingSeparator + string
+                if string.isEmpty { // pressed Backspace key
+                    totalTextWithoutGroupingSeparators.removeLast()
+                }
+                if let numberWithoutGroupingSeparator = formatter.number(from: totalTextWithoutGroupingSeparators),
+                    let formattedText = formatter.string(from: numberWithoutGroupingSeparator) {
+
+                    textField.text = formattedText
+              
+                    let ftext = formattedText.replacingOccurrences(of: groupingSeparator, with: "")
+                    saleSlider.value = (ftext as NSString).floatValue
+                    getBuildOrderDetail(buildId:"", sliderVal:(numberWithoutGroupingSeparator).intValue)
+//                getBuildOrderDetail(buildId:"", sliderVal:(ftext as NSString).integerValue)
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    
     @objc func onSliderValChanged(slider: UISlider, event: UIEvent) {
         if let touchEvent = event.allTouches?.first {
             switch touchEvent.phase {
@@ -48,8 +105,17 @@ class AddBuildOrderVC: UIViewController {
             case .moved: break
                 // handle drag moved
             case .ended:
-                totalSale = "\(Int(slider.value))"
-                salesPriceLbl.text = "$\(Int(slider.value)) Sales"
+                let bigNumber = slider.value
+                let fDec = bigNumber.rounded(rule: .plain, scale: 0)
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                
+                guard let formattedNumber = numberFormatter.string(from: NSNumber(value: fDec)) else { return }
+                print(formattedNumber)
+              
+                salesPriceTF.text = "\(formattedNumber)"
+                totalSale = "\(formattedNumber)"
+
                 getBuildOrderDetail(buildId:"", sliderVal: (Int(slider.value)))
                 // handle drag ended
             default:
@@ -94,6 +160,7 @@ class AddBuildOrderVC: UIViewController {
                         
                         //                let status = jsonResult?["status"] as? Int ?? 0
                         if addDailyInventoryResp?.status == 1{
+                            
                             self.responseArray = addDailyInventoryResp!.buildOrderDetailArr
                             let userDetailDict = addDailyInventoryResp?.buildOrderDetailDict as? [String:AnyHashable] ?? [:]
                             self.commentTV.text = userDetailDict["comment"] as? String ?? ""
@@ -136,6 +203,20 @@ class AddBuildOrderVC: UIViewController {
                 }
             }
         
+    }
+    @objc func textFieldDidChange(theTextField:UITextField){
+        var parentCell = theTextField.superview
+
+        while !(parentCell is AddBuildOrderTBCell) {
+            parentCell = parentCell?.superview
+        }
+        var indexPath: IndexPath? = nil
+        let cell1 = parentCell as? AddBuildOrderTBCell
+        indexPath = addBuildOrderTBView.indexPath(for: cell1!)
+        if theTextField.text != ""{
+            responseArray[indexPath!.row]["orderQuantity"] = theTextField.text
+        }
+       
     }
     @objc func increaseQuantity(_ sender: UIButton?) {
         var parentCell = sender?.superview
@@ -190,11 +271,23 @@ class AddBuildOrderVC: UIViewController {
               
                 let ingredientId = responseArray[i]["ingredientId"] as? String ?? ""
                 let quantity = responseArray[i]["orderQuantity"] as? String ?? ""
+                
+                let formatter = NumberFormatter()
+                formatter.minimumFractionDigits = 0
+                formatter.maximumFractionDigits = 2
+
+                // Avoid not getting a zero on numbers lower than 1
+                // Eg: .5, .67, etc...
+                formatter.numberStyle = .decimal
+
+                let floatOQ = (quantity as NSString).floatValue
+
+                let finalOQ = formatter.string(from: floatOQ as NSNumber)
                 let theoreticalValue = responseArray[i]["theoreticalValue"] as? String ?? ""
                 let onHand = responseArray[i]["onHand"] as? String ?? ""
                 let wasteQuantity = responseArray[i]["wasteQuantity"] as? String ?? ""
 
-                let ingQuantityDict = ["ingredientId":ingredientId,"orderQuantity":quantity,"theoreticalValue":theoreticalValue,"onHand":onHand,"wasteQuantity":wasteQuantity]
+                let ingQuantityDict = ["ingredientId":ingredientId,"orderQuantity":finalOQ ?? "","theoreticalValue":theoreticalValue,"onHand":onHand,"wasteQuantity":wasteQuantity]
                 quantityIDDictArr.append(ingQuantityDict)
             }
         }
@@ -296,10 +389,11 @@ class AddBuildOrderVC: UIViewController {
                 }
             
         }
+   
     @IBAction func clearValuesBtnAction(_ sender: Any) {
         saleSlider.value = 16000
         getBuildOrderDetail(buildId:"", sliderVal:16000)
-        salesPriceLbl.text = "$\(Int(saleSlider.value)) Sales"
+        salesPriceTF.text = "\(Int(saleSlider.value))"
 
 //        saveBuildOrderApi(isSave: "", isClear: "1")
 
@@ -342,7 +436,26 @@ extension AddBuildOrderVC:UITableViewDataSource,UITableViewDelegate{
                 // Fallback on earlier versions
             }
         }
-        cell?.buildOrderQuantityTF.text = respDict["orderQuantity"] as? String ?? ""
+        let orderQuantity = respDict["orderQuantity"] as? String ?? ""
+        
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+
+        // Avoid not getting a zero on numbers lower than 1
+        // Eg: .5, .67, etc...
+        formatter.numberStyle = .decimal
+
+        let floatOQ = (orderQuantity as NSString).floatValue
+
+        let finalOQ = formatter.string(from: floatOQ as NSNumber)
+        
+       
+        
+        cell?.buildOrderQuantityTF.text = finalOQ ?? ""
+        cell?.buildOrderQuantityTF.delegate = self
+        cell?.buildOrderQuantityTF.addTarget(self, action: #selector(textFieldDidChange(theTextField:)), for: .editingChanged)
+        
 //        cell?.buildorder.text = respDict["theoreticalValue"] as? String ?? ""
         cell?.increaseQuantityBtn?.addTarget(self, action: #selector(increaseQuantity(_:)), for: .touchUpInside)
         cell?.decreaseQuantityBtn?.addTarget(self, action: #selector(decreaseQuantity(_:)), for: .touchUpInside)
@@ -367,5 +480,15 @@ extension AddBuildOrderVC:UITableViewDataSource,UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
+    }
+}
+
+
+extension Float {
+    func rounded(rule: NSDecimalNumber.RoundingMode, scale: Int) -> Float {
+        var result: Decimal = 0
+        var decimalSelf = NSNumber(value: self).decimalValue
+        NSDecimalRound(&result, &decimalSelf, scale, rule)
+        return (result as NSNumber).floatValue
     }
 }

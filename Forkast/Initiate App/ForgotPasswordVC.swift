@@ -47,7 +47,7 @@ class ForgotPasswordVC: UIViewController,UITextFieldDelegate{
     open func forgotPasswordApi(){
         
         
-        guard let url = URL(string: WS_Staging + WSMethods.forgotPassword) else { return }
+        guard let url = URL(string: kBASEURL + WSMethods.forgotPassword) else { return }
     
         restF.requestHttpHeaders.add(value: "application/json", forKey: "Content-Type")
         restF.httpBodyParameters.add(value:userNameTF.text ?? "", forKey:"email")

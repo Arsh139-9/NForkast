@@ -151,7 +151,7 @@ class PopUpListVC: UIViewController {
         
         let params = ["userId": userId,"pageno":"\(page)","per_page":"10"]
         
-        let strURL = kBASEURL + WSMethods.getAllIngredient
+        let strURL = kBASEURL + WSMethods.getAllIngredientList
         
         let urlwithPercentEscapes = strURL.addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)
         SVProgressHUD.show()

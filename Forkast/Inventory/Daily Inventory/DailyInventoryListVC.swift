@@ -170,13 +170,15 @@ extension DailyInventoryListVC:UITableViewDataSource,UITableViewDelegate{
         print(unixtimeInterval,"Timeee")
         let date = Date(timeIntervalSince1970:  unixtimeInterval.doubleValue)
         let dateFormatterD = DateFormatter()
-        dateFormatterD.timeZone = TimeZone(abbreviation: "IST") //Set timezone that you want
+        dateFormatterD.timeZone = .current
+//        dateFormatterD.timeZone = TimeZone(abbreviation: "UTC") //Set timezone that you want
         dateFormatterD.locale = NSLocale.current
         dateFormatterD.dateFormat = "MMM d" //Specify your format that you want
         let strDate = dateFormatterD.string(from: date)
         
         let dateFormatterT = DateFormatter()
-        dateFormatterT.timeZone = TimeZone(abbreviation: "IST") //Set timezone that you want
+            dateFormatterT.timeZone = .current
+//        dateFormatterT.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
         dateFormatterT.locale = NSLocale.current
         dateFormatterT.dateFormat = "h:mm a" //Specify your format that you want
         let strTime = dateFormatterT.string(from: date)

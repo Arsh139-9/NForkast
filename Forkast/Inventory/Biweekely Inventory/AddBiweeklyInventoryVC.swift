@@ -13,7 +13,7 @@ protocol SendingAddBiweekelyToBiweekelyMainPageDelegateProtocol {
     func sendDataToBiweekelyVC(myData: Bool)
 }
 
-class AddBiweeklyInventoryVC: UIViewController {
+class AddBiweeklyInventoryVC: UIViewController, UITextFieldDelegate {
     var responseArray = [[String:Any]]()
     var count = Int()
     var countArr = [Int]()
@@ -241,6 +241,20 @@ class AddBiweeklyInventoryVC: UIViewController {
             }
         
     }
+    @objc func textFieldDidChange(theTextField:UITextField){
+        var parentCell = theTextField.superview
+
+        while !(parentCell is BiweekelyInventoryDetailCell) {
+            parentCell = parentCell?.superview
+        }
+        var indexPath: IndexPath? = nil
+        let cell1 = parentCell as? BiweekelyInventoryDetailCell
+        indexPath = biweekelyTBView.indexPath(for: cell1!)
+        if theTextField.text != ""{
+            responseArray[indexPath!.row]["total_quantity"] = theTextField.text
+        }
+       
+    }
     open func getBiweekelyInventoryDetail(weeklyId:String){
         let userIds = getSAppDefault(key: "UserId") as? String ?? ""
         let token = getSAppDefault(key: "AuthToken") as? String ?? ""
@@ -330,6 +344,8 @@ extension AddBiweeklyInventoryVC:UITableViewDataSource,UITableViewDelegate{
             cell?.biCaseLbl.text = ""
         }
         cell?.biQuantityTF.text = respDict["total_quantity"] as? String ?? ""
+        cell?.biQuantityTF.delegate = self
+        cell?.biQuantityTF.addTarget(self, action: #selector(textFieldDidChange(theTextField:)), for: .editingChanged)
 
         cell?.increaseQuantityBtn?.addTarget(self, action: #selector(increaseQuantity(_:)), for: .touchUpInside)
         cell?.decreaseQuantityBtn?.addTarget(self, action: #selector(decreaseQuantity(_:)), for: .touchUpInside)
@@ -338,7 +354,9 @@ extension AddBiweeklyInventoryVC:UITableViewDataSource,UITableViewDelegate{
         var sPhotoStr = respDict["image"] as? String ?? ""
         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
         if sPhotoStr != ""{
-            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:nil)
+            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:UIImage(named: "inventoryPlaceholderImg"))
+        }else{
+            cell?.biweeklyProfileImg.image = UIImage(named: "inventoryPlaceholderImg")
         }
 
         DispatchQueue.main.async {

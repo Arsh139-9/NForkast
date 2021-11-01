@@ -21,15 +21,18 @@ struct WSMethods {
     static let signUp = "signUp.php"
     static let getAllDailyInventoryDetail = "GetAllDailyInventoryDetail.php"
     static let getAllBiweeklyInventoryDetail = "GetAllBiweeklyInventoryDetail.php"
-    static let addDailyInventoryDetail = "AddDailyInventory.php"
+   // static let addDailyInventoryDetail = "AddDailyInventory.php"
+    static let addDailyInventoryDetail = "AddDailyInventoryv2.php"
     static let addBiWeeklyInventory = "AddBiWeeklyInventory.php"
     static let getAllProduct = "GetAllProduct.php"
     static let addProduct = "AddProduct.php"
     static let getAllIngredient = "GetAllIngredient.php"
+    static let getAllIngredientList = "GetAllIngredientList.php"
     static let getListOfItem = "GetListOfItem.php"
     static let addIngredient = "AddIngredient.php"
     static let addIngredientProductDetail = "AddIngredientProductDetail.php"
     static let addMaping = "AddMaping.php"
+    static let matchMappingUnit = "MatchMappingUnit.php"
     static let getAllBuildOrderDetail = "GetAllBuildOrderDetail.php"
     static let addBuildOrder = "AddBuildOrder.php"
     static let getNotificationDetailById = "GetNotificationDetailById.php"
@@ -44,10 +47,10 @@ struct WSMethods {
 }
 
 
-let WS_Live = ""
-let WS_Staging = "https://www.dharmani.com/forkast/WebServices/"
+let WS_Live = "https://forkastapp.com/WebServices/"
+ let WS_Staging = "https://www.dharmani.com/forkast/WebServices/"
 
-let kBASEURL = WS_Staging
+let kBASEURL = WS_Live
 
 
 struct SettingWebLinks {

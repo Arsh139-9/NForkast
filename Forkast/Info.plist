@@ -28,9 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Click Photos</string>
+	<string>$(PRODUCT_NAME) app requires access to the camera to take profile photo.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Choose Images</string>
+	<string>$(PRODUCT_NAME) app requires access to the photo library to choose profile photo.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Black.ttf</string>

@@ -23,6 +23,8 @@ class HomeChildTabVC: UIViewController {
         let role  = getSAppDefault(key: "Role") as? String ?? ""
         if role == "2"{
             buildOrderView.isHidden = false
+//            buildOrderView.isHidden = true
+
             productIngredientView.isHidden = false
         }else{
             buildOrderView.isHidden = true

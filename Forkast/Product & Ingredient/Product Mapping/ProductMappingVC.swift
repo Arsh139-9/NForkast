@@ -105,16 +105,11 @@ class ProductMappingVC: UIViewController {
         else{
             let ingredientID = getSAppDefault(key: "ingredientId") as? String ?? ""
              let ingredientName = getSAppDefault(key: "IName") as? String ?? ""
-             let dict = [
-                 "name":ingredientName,
-                 "ingredientId":ingredientID,
-                 "quantity":popUpQuantityTF.text ?? "",
-                 "UOM":popUpUOMTF.text ?? "",
-                 "waste_factor":popUpWastingFactorTf.text ?? ""
-             ]
-             addIngredientArray.append(dict)
-             addIngredientPopUpView.isHidden = true
-             addedIngredientTBView.reloadData()
+            let uOMId = getSAppDefault(key: "unitId") as? String ?? ""
+            
+            saveUnitCheckApi(ingredientId:ingredientID, uOMId: uOMId, ingredientName: ingredientName)
+            
+             
         }
 
     }
@@ -169,6 +164,107 @@ class ProductMappingVC: UIViewController {
         addIngredientPopUpView.isHidden = false
         ingredientRespArray.removeAll()
     }
+    
+    open func saveUnitCheckApi(ingredientId:String,uOMId:String,ingredientName:String){
+        //        let compressedData = productImgView.image?.jpegData(compressionQuality: 0.2)
+        //        let base64:String = compressedData?.base64EncodedString(options: .lineLength64Characters) ?? ""
+        //        debugPrint("base64------> \(base64)")
+//        {
+//        "userId":"13",
+//        "productId":"64",
+//        "ingredientId":"142",
+//        "quantity":"4",
+//        "UOM":"3"}
+        
+        let userId  = getSAppDefault(key: "UserId") as? String ?? ""
+
+        let token = getSAppDefault(key: "AuthToken") as? String ?? ""
+//        {
+//                "productId":"1",
+//                "userId":"13",
+//                "ingredient_detail":[
+//        {
+//                "ingredientId":"1",
+//                "quantity":"10",
+//                "UOM":"Count",
+//                "waste_factor":"2%"
+//        },
+//        {
+//                "ingredientId":"3",
+//                "quantity":"5",
+//                "UOM":"Count",
+//                "waste_factor":"3%"
+//        }
+//        ]
+//        }
+        let productId = getSAppDefault(key: "productId") as? String ?? ""
+
+        let paramds = ["productId": productId,"userId":userId,"ingredientId":ingredientId,"UOM":uOMId,"quantity":popUpQuantityTF.text ?? ""] as [String : Any]
+
+        let strURL = kBASEURL + WSMethods.matchMappingUnit
+
+        let urlwithPercentEscapes = strURL.addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        SVProgressHUD.show()
+
+        AF.request(urlwithPercentEscapes!, method: .post, parameters: paramds, encoding: JSONEncoding.default, headers: ["Content-Type":"application/json","Token":token])
+            .responseJSON { (response) in
+                SVProgressHUD.dismiss()
+                switch response.result {
+                case .success(let value):
+                    if let JSON = value as? [String: Any] {
+                        print(JSON as NSDictionary)
+                        let addProductDataResp =  AddProductData.init(dict: JSON )
+
+                        if addProductDataResp?.status == 1{
+
+                            let dict = [
+                                "name":ingredientName,
+                                "ingredientId":ingredientId,
+                                "quantity":self.popUpQuantityTF.text ?? "",
+                               //UOM id in string
+                               
+                                "UOM":uOMId,
+                                "waste_factor":self.popUpWastingFactorTf.text ?? ""
+                            ]
+                            self.addIngredientArray.append(dict)
+                            self.addIngredientPopUpView.isHidden = true
+                            self.addedIngredientTBView.reloadData()
+
+                        }else{
+                            DispatchQueue.main.async {
+
+                                Alert.present(
+                                    title: AppAlertTitle.appName.rawValue,
+                                    message: addProductDataResp?.message ?? "",
+                                    actions: .ok(handler: {
+//                                        self.addIngredientArray.removeAll()
+//                                        self.addedIngredientTBView.reloadData()
+                                    }),
+                                    from: self
+                                )
+                            }
+                        }
+
+
+                    }
+                case .failure(let error):
+                    let error : NSError = error as NSError
+                    print(error)
+                    DispatchQueue.main.async {
+
+                        Alert.present(
+                            title: AppAlertTitle.appName.rawValue,
+                            message: AppAlertTitle.connectionError.rawValue,
+                            actions: .ok(handler: {
+                            }),
+                            from: self
+                        )
+                    }
+                }
+            }
+
+    }
+    
     open func saveProductMappingApi(){
         //        let compressedData = productImgView.image?.jpegData(compressionQuality: 0.2)
         //        let base64:String = compressedData?.base64EncodedString(options: .lineLength64Characters) ?? ""
@@ -229,6 +325,8 @@ class ProductMappingVC: UIViewController {
                                     title: AppAlertTitle.appName.rawValue,
                                     message: addProductDataResp?.message ?? "",
                                     actions: .ok(handler: {
+//                                        self.addIngredientArray.removeAll()
+//                                        self.addedIngredientTBView.reloadData()
                                     }),
                                     from: self
                                 )
