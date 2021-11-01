@@ -87,8 +87,8 @@ class AddBuildOrderVC: UIViewController,UITextFieldDelegate{
               
                     let ftext = formattedText.replacingOccurrences(of: groupingSeparator, with: "")
                     saleSlider.value = (ftext as NSString).floatValue
-                    getBuildOrderDetail(buildId:"", sliderVal:(numberWithoutGroupingSeparator).intValue)
-//                getBuildOrderDetail(buildId:"", sliderVal:(ftext as NSString).integerValue)
+
+                getBuildOrderDetail(buildId:"", sliderVal:(formattedText as NSString).integerValue)
                     return false
                 }
             }
