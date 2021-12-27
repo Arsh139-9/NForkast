@@ -22,7 +22,7 @@ struct WSMethods {
     static let getAllDailyInventoryDetail = "GetAllDailyInventoryDetail.php"
     static let getAllBiweeklyInventoryDetail = "GetAllBiweeklyInventoryDetail.php"
    // static let addDailyInventoryDetail = "AddDailyInventory.php"
-    static let addDailyInventoryDetail = "AddDailyInventoryv2.php"
+    static let addDailyInventoryDetail = "AddDailyInventory.php"
     static let addBiWeeklyInventory = "AddBiWeeklyInventory.php"
     static let getAllProduct = "GetAllProduct.php"
     static let addProduct = "AddProduct.php"

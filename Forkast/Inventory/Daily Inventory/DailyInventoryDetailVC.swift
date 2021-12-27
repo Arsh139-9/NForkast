@@ -44,12 +44,8 @@ class DailyInventoryDetailVC: UIViewController {
     
     @IBAction func backBtnAction(_ sender: Any) {
         if fromAppDelegate == "YES"{
-            let storyBoard = UIStoryboard(name: StoryboardName.Main, bundle: nil)
-            let DVC = storyBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.HomeTabVC) as? HomeTabVC
-                        DVC?.selectedIndex = 0
-                        if let DVC = DVC {
-                            self.navigationController?.pushViewController(DVC, animated: true)
-                        }
+            self.navigationController?.popToViewController(of: HomeChildTabVC.self, animated: true)
+
             fromAppDelegate = "NO"
         }
         else if fromNotification == "YES"{
@@ -80,10 +76,7 @@ class DailyInventoryDetailVC: UIViewController {
             userIds = getSAppDefault(key: "UserId") as? String ?? ""
             token = getSAppDefault(key: "AuthToken") as? String ?? ""
         }
-       
-        
-        
-        
+ 
         let paramds = ["dailyId": dailyIds,"userId": userIds,"itemId":[],"comment":"","draft":"","is_save":""] as [String : Any]
         
         let strURL = kBASEURL + WSMethods.addDailyInventoryDetail
@@ -100,7 +93,6 @@ class DailyInventoryDetailVC: UIViewController {
                         print(JSON as NSDictionary)
                         let addDailyInventoryResp =  AddDetailDailyInventoryData.init(dict: JSON )
                         
-                        //                let status = jsonResult?["status"] as? Int ?? 0
                         if addDailyInventoryResp?.status == 1{
                             let dailyProductDetailArr = addDailyInventoryResp!.dailyProductDetailArr
                             let specialProductDetailArr = addDailyInventoryResp!.specialProductDetailArr
@@ -127,14 +119,10 @@ class DailyInventoryDetailVC: UIViewController {
 
                     Alert.present(
                         title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
+                        message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                         actions: .ok(handler: {
-                            let storyBoard = UIStoryboard(name: StoryboardName.Main, bundle: nil)
-                            let DVC = storyBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.HomeTabVC) as? HomeTabVC
-                                        DVC?.selectedIndex = 0
-                                        if let DVC = DVC {
-                                            self.navigationController?.pushViewController(DVC, animated: true)
-                                        }
+                            self.navigationController?.popToViewController(of: HomeChildTabVC.self, animated: true)
+
                         }),
                         from: self
                     )
@@ -185,9 +173,12 @@ extension DailyInventoryDetailVC:UITableViewDataSource,UITableViewDelegate{
         }else{
             cell.checkUncheckImgView.image = #imageLiteral(resourceName: "uncheckImg")
         }
-        tableView.layoutIfNeeded()
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        dailyInventoryTBHeightConstraint.constant = dailyInventoryDetailTBView.contentSize.height
+        DispatchQueue.main.async {
+            tableView.layoutIfNeeded()
+            tableView.estimatedRowHeight = UITableView.automaticDimension
+            self.dailyInventoryTBHeightConstraint.constant = self.dailyInventoryDetailTBView.contentSize.height
+        }
+     
         return cell
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -203,3 +194,4 @@ extension DailyInventoryDetailVC:UITableViewDataSource,UITableViewDelegate{
     }
     
 }
+

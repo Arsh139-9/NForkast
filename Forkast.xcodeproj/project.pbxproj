@@ -12,6 +12,7 @@
 		1848A81C25F729E400A02367 /* BuildOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1848A81B25F729E400A02367 /* BuildOrder.storyboard */; };
 		1848A82125F72A0200A02367 /* ProductIngredients.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1848A82025F72A0200A02367 /* ProductIngredients.storyboard */; };
 		18543A0F25F933E20044CB32 /* BiweekelyInventoryDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18543A0E25F933E20044CB32 /* BiweekelyInventoryDetailCell.swift */; };
+		186A3F1C276869EE00388906 /* AppIBDesignableUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186A3F1B276869ED00388906 /* AppIBDesignableUI.swift */; };
 		18C260E925F689810051223D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C260E825F689810051223D /* AppDelegate.swift */; };
 		18C260EB25F689810051223D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C260EA25F689810051223D /* SceneDelegate.swift */; };
 		18C260ED25F689810051223D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C260EC25F689810051223D /* ViewController.swift */; };
@@ -20,7 +21,6 @@
 		18C260F525F689820051223D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18C260F325F689820051223D /* LaunchScreen.storyboard */; };
 		18C2610025F689820051223D /* ForkastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C260FF25F689820051223D /* ForkastTests.swift */; };
 		18C2610B25F689820051223D /* ForkastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2610A25F689820051223D /* ForkastUITests.swift */; };
-		18C2613425F68CFC0051223D /* AppIBDesignableUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2612B25F68CFC0051223D /* AppIBDesignableUI.swift */; };
 		18C2613525F68CFC0051223D /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2612C25F68CFC0051223D /* AppDefaults.swift */; };
 		18C2613625F68CFC0051223D /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2612D25F68CFC0051223D /* AppAlert.swift */; };
 		18C2613725F68CFC0051223D /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2612E25F68CFC0051223D /* AppConstant.swift */; };
@@ -127,6 +127,7 @@
 		1848A81B25F729E400A02367 /* BuildOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BuildOrder.storyboard; sourceTree = "<group>"; };
 		1848A82025F72A0200A02367 /* ProductIngredients.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductIngredients.storyboard; sourceTree = "<group>"; };
 		18543A0E25F933E20044CB32 /* BiweekelyInventoryDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiweekelyInventoryDetailCell.swift; sourceTree = "<group>"; };
+		186A3F1B276869ED00388906 /* AppIBDesignableUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIBDesignableUI.swift; sourceTree = "<group>"; };
 		18C260E525F689810051223D /* Forkast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forkast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C260E825F689810051223D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18C260EA25F689810051223D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,7 +142,6 @@
 		18C2610625F689820051223D /* ForkastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForkastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C2610A25F689820051223D /* ForkastUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForkastUITests.swift; sourceTree = "<group>"; };
 		18C2610C25F689820051223D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18C2612B25F68CFC0051223D /* AppIBDesignableUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIBDesignableUI.swift; sourceTree = "<group>"; };
 		18C2612C25F68CFC0051223D /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
 		18C2612D25F68CFC0051223D /* AppAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
 		18C2612E25F68CFC0051223D /* AppConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
@@ -334,7 +334,6 @@
 		18C2612A25F68CFC0051223D /* App */ = {
 			isa = PBXGroup;
 			children = (
-				18C2612B25F68CFC0051223D /* AppIBDesignableUI.swift */,
 				18C2612C25F68CFC0051223D /* AppDefaults.swift */,
 				18C2612D25F68CFC0051223D /* AppAlert.swift */,
 				18C2612E25F68CFC0051223D /* AppConstant.swift */,
@@ -343,6 +342,7 @@
 				18C2613125F68CFC0051223D /* AppValidations.swift */,
 				18C2613225F68CFC0051223D /* AppRepeatingTimer.swift */,
 				18C2613325F68CFC0051223D /* AppLocationService.swift */,
+				186A3F1B276869ED00388906 /* AppIBDesignableUI.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -969,12 +969,12 @@
 				AF08A4352600783A000EC4F7 /* AddProductEntity.swift in Sources */,
 				AFEAC7202605CCEB009E42A6 /* AddedIngredientTBCell.swift in Sources */,
 				AFDB6E4525F8BBC100AAA287 /* DailyInventoryListVC.swift in Sources */,
+				186A3F1C276869EE00388906 /* AppIBDesignableUI.swift in Sources */,
 				18543A0F25F933E20044CB32 /* BiweekelyInventoryDetailCell.swift in Sources */,
 				AF48A2B925FF55E500437321 /* ProductListCell.swift in Sources */,
 				AF48A29E25FF46ED00437321 /* ProductIngredientHomeVC.swift in Sources */,
 				AF90BE52260B21E9002A3F4A /* BuildOrderDetailVC.swift in Sources */,
 				AFEAC71B2605CA56009E42A6 /* ProductMappingVC.swift in Sources */,
-				18C2613425F68CFC0051223D /* AppIBDesignableUI.swift in Sources */,
 				18C260EB25F689810051223D /* SceneDelegate.swift in Sources */,
 				18C2613C25F68CFC0051223D /* AppLocationService.swift in Sources */,
 				AF0EC97F2603651300B307EC /* AddIngredientPopUpTBCell.swift in Sources */,
@@ -1170,7 +1170,7 @@
 				CODE_SIGN_ENTITLEMENTS = Forkast/Forkast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.38;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = NXRYLUFNHX;
 				INFOPLIST_FILE = Forkast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1178,12 +1178,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.forkast.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Forkast Dist 16 feb 2021";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1196,7 +1196,7 @@
 				CODE_SIGN_ENTITLEMENTS = Forkast/Forkast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.38;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = NXRYLUFNHX;
 				INFOPLIST_FILE = Forkast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
@@ -1204,12 +1204,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.forkast.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Forkast Dist 16 feb 2021";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1219,7 +1219,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ForkastTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1229,6 +1232,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dharmaniApps.ForkastTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Forkast.app/Forkast";
@@ -1241,7 +1246,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ForkastTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1251,6 +1258,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dharmaniApps.ForkastTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Forkast.app/Forkast";

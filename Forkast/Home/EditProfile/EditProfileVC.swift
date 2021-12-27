@@ -12,7 +12,7 @@ import SVProgressHUD
 
 class EditProfileVC: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate{
     var userDetailDict = [String:AnyHashable]()
-
+    
     @IBOutlet weak var userProfileImgView: UIImageView!
     
     @IBOutlet weak var userNameLbl: UILabel!
@@ -74,7 +74,7 @@ class EditProfileVC: UIViewController,UINavigationControllerDelegate,UIImagePick
         let chosenImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         userProfileImgView.image = chosenImage
         picker.dismiss(animated: true)
-
+        
     }
     @IBAction func choosePhotoBtnAction(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -117,7 +117,7 @@ class EditProfileVC: UIViewController,UINavigationControllerDelegate,UIImagePick
     
     @IBAction func backBtnAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
-
+        
     }
     
     @IBAction func saveEditProfileBtnAction(_ sender: Any) {
@@ -130,24 +130,24 @@ class EditProfileVC: UIViewController,UINavigationControllerDelegate,UIImagePick
                 from: self
             )
         }
-//      else if emailTF.text?.trimmingCharacters(in: .whitespaces) == ""{
-//            Alert.present(
-//                title: AppAlertTitle.appName.rawValue,
-//                message: AppSignInForgotSignUpAlertNessage.enterEmail,
-//                actions: .ok(handler: {
-//                }),
-//                from: self
-//            )
-//        }
-//        else  if !validateEmail(strEmail: emailTF.text ?? ""){
-//            Alert.present(
-//                title: AppAlertTitle.appName.rawValue,
-//                message: AppSignInForgotSignUpAlertNessage.validEmail,
-//                actions: .ok(handler: {
-//                }),
-//                from: self
-//            )
-//        }
+        //      else if emailTF.text?.trimmingCharacters(in: .whitespaces) == ""{
+        //            Alert.present(
+        //                title: AppAlertTitle.appName.rawValue,
+        //                message: AppSignInForgotSignUpAlertNessage.enterEmail,
+        //                actions: .ok(handler: {
+        //                }),
+        //                from: self
+        //            )
+        //        }
+        //        else  if !validateEmail(strEmail: emailTF.text ?? ""){
+        //            Alert.present(
+        //                title: AppAlertTitle.appName.rawValue,
+        //                message: AppSignInForgotSignUpAlertNessage.validEmail,
+        //                actions: .ok(handler: {
+        //                }),
+        //                from: self
+        //            )
+        //        }
         else if phoneNumberTF.text?.trimmingCharacters(in: .whitespaces) == ""{
             Alert.present(
                 title: AppAlertTitle.appName.rawValue,
@@ -165,9 +165,9 @@ class EditProfileVC: UIViewController,UINavigationControllerDelegate,UIImagePick
         let base64:String = compressedData?.base64EncodedString(options: .lineLength64Characters) ?? ""
         debugPrint("base64------> \(base64)")
         let userId = getSAppDefault(key: "UserId") as? String ?? ""
-
+        
         let token = getSAppDefault(key: "AuthToken") as? String ?? ""
-    
+        
         let paramds = ["name":userNameTF.text ?? "" ,"email":emailTF.text ?? "","phone_number":phoneNumberTF.text ?? "","country":"","image":base64,"country_image":"","userId":userId] as [String : Any]
         
         let strURL = kBASEURL + WSMethods.editProfile
@@ -177,28 +177,26 @@ class EditProfileVC: UIViewController,UINavigationControllerDelegate,UIImagePick
         AF.request(urlwithPercentEscapes!, method: .post, parameters: paramds, encoding: JSONEncoding.default, headers: ["Content-Type":"application/json","Token":token])
             .responseJSON { (response) in
                 SVProgressHUD.dismiss()
-
+                
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any] {
-                        print(JSON as NSDictionary)
                         let editProfileResp =  LoginData.init(dict: JSON )
                         
-                        //                let status = jsonResult?["status"] as? Int ?? 0
                         if editProfileResp?.status == 1{
                             self.navigationController?.popViewController(animated: true)
-
+                            
                             
                         }else{
                             DispatchQueue.main.async {
-
-                            Alert.present(
-                                title: AppAlertTitle.appName.rawValue,
-                                message: editProfileResp?.message ?? "",
-                                actions: .ok(handler: {
-                                }),
-                                from: self
-                            )
+                                
+                                Alert.present(
+                                    title: AppAlertTitle.appName.rawValue,
+                                    message: editProfileResp?.message ?? "",
+                                    actions: .ok(handler: {
+                                    }),
+                                    from: self
+                                )
                             }
                         }
                         
@@ -206,20 +204,19 @@ class EditProfileVC: UIViewController,UINavigationControllerDelegate,UIImagePick
                     }
                 case .failure(let error):
                     let error : NSError = error as NSError
-                    print(error)
                     DispatchQueue.main.async {
-
-                    Alert.present(
-                        title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
-                        actions: .ok(handler: {
-                        }),
-                        from: self
-                    )
+                        
+                        Alert.present(
+                            title: AppAlertTitle.appName.rawValue,
+                            message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
+                            actions: .ok(handler: {
+                            }),
+                            from: self
+                        )
                     }
                 }
             }
-     
+        
         
     }
 }

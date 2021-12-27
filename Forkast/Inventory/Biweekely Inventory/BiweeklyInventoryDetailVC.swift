@@ -37,12 +37,8 @@ class BiweeklyInventoryDetailVC: UIViewController {
     
     @IBAction func backBtnAction(_ sender: Any) {
         if fromAppDelegate == "YES"{
-            let storyBoard = UIStoryboard(name: StoryboardName.Main, bundle: nil)
-            let DVC = storyBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.HomeTabVC) as? HomeTabVC
-                        DVC?.selectedIndex = 0
-                        if let DVC = DVC {
-                            self.navigationController?.pushViewController(DVC, animated: true)
-                        }
+            self.navigationController?.popToViewController(of: HomeChildTabVC.self, animated: true)
+
             fromAppDelegate = "NO"
         }
         else if fromNotification == "YES"{
@@ -110,14 +106,10 @@ class BiweeklyInventoryDetailVC: UIViewController {
 
                     Alert.present(
                         title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
+                        message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                         actions: .ok(handler: {
-                            let storyBoard = UIStoryboard(name: StoryboardName.Main, bundle: nil)
-                            let DVC = storyBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.HomeTabVC) as? HomeTabVC
-                                        DVC?.selectedIndex = 0
-                                        if let DVC = DVC {
-                                            self.navigationController?.pushViewController(DVC, animated: true)
-                                        }
+                            self.navigationController?.popToViewController(of: HomeChildTabVC.self, animated: true)
+
                         }),
                         from: self
                     )
@@ -161,9 +153,9 @@ extension BiweeklyInventoryDetailVC:UITableViewDataSource,UITableViewDelegate{
         var sPhotoStr = respDict["image"] as? String ?? ""
         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
         if sPhotoStr != ""{
-            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:UIImage(named: "inventoryPlaceholderImg"))
+            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:UIImage(named: "proIngPlaceholderImg"))
         }else{
-            cell?.biweeklyProfileImg.image = UIImage(named: "inventoryPlaceholderImg")
+            cell?.biweeklyProfileImg.image = UIImage(named: "proIngPlaceholderImg")
         }
         cell?.increaseQuantityBtn.isHidden = true
         cell?.decreaseQuantityBtn.isHidden = true

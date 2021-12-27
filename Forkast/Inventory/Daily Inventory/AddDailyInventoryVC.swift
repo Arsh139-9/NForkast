@@ -78,19 +78,19 @@ class AddDailyInventoryVC: UIViewController {
               itemIdArr.append(itemId)
               }
         }
-        if itemIdArr.count == 0{
-                Alert.present(
-                    title: AppAlertTitle.appName.rawValue,
-                    message: "Please select item",
-                    actions: .ok(handler: {
-                    }),
-                    from: self
-                )
-            
-        }else{
-            addDailyInventoryDetailApi(draft: "", isSave: "1")
+//        if itemIdArr.count == 0{
+//                Alert.present(
+//                    title: AppAlertTitle.appName.rawValue,
+//                    message: "Please select item",
+//                    actions: .ok(handler: {
+//                    }),
+//                    from: self
+//                )
+//
+//        }else{
+            commentTextView.text != "" ? addDailyInventoryDetailApi(draft: "", isSave: "1") :   Alert.present(title: AppAlertTitle.appName.rawValue,message: "Please enter comment",actions: .ok(handler: {}),from: self)
 
-        }
+       // }
         }
 
     }
@@ -136,7 +136,6 @@ class AddDailyInventoryVC: UIViewController {
        
         let paramds = ["dailyId": draftDailyId,"userId": userIds,"itemId":itemIdArr,"comment":commentTextView.text ?? "","draft":draft,"is_save":isSave] as [String : Any]
 
-
           
           let strURL = kBASEURL + WSMethods.addDailyInventoryDetail
           
@@ -151,13 +150,11 @@ class AddDailyInventoryVC: UIViewController {
                           print(JSON as NSDictionary)
                           let addDailyInventoryResp =  AddDetailBiweekelyInventoryData.init(dict: JSON )
                           
-                          //                let status = jsonResult?["status"] as? Int ?? 0
                           if addDailyInventoryResp?.status == 1{
                             if self.delegate != nil{
                                 self.delegate?.sendDataToDailyVC(myData: false)
                             }
                               self.navigationController?.popViewController(animated: true)
-                              
                           }else{
                               DispatchQueue.main.async {
 
@@ -180,7 +177,7 @@ class AddDailyInventoryVC: UIViewController {
 
                       Alert.present(
                           title: AppAlertTitle.appName.rawValue,
-                          message: AppAlertTitle.connectionError.rawValue,
+                          message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                           actions: .ok(handler: {
                           }),
                           from: self

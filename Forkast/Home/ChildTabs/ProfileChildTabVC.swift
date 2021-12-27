@@ -12,13 +12,11 @@ import SVProgressHUD
 @available(iOS 13.0, *)
 
 class ProfileChildTabVC: UIViewController {
-
+    
     @IBOutlet weak var userNameLbl: UILabel!
-    
     @IBOutlet weak var userEmailLbl: UILabel!
-    
     @IBOutlet weak var phoneNumberLbl: UILabel!
-
+    
     
     @IBOutlet weak var profileImgView: UIImageView!
     var appDel = AppDelegate()
@@ -28,7 +26,7 @@ class ProfileChildTabVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-   
+    
     
     @IBAction func aboutLinkBtnAction(_ sender: Any) {
         let CMDVC = self.storyboard?.instantiateViewController(withIdentifier: ViewControllerIdentifier.LinksWebVC) as? LinksWebVC
@@ -44,7 +42,7 @@ class ProfileChildTabVC: UIViewController {
         let CMDVC = self.storyboard?.instantiateViewController(withIdentifier: ViewControllerIdentifier.LinksWebVC) as? LinksWebVC
         CMDVC?.webLinkUrlString = kBASEURL + SettingWebLinks.privacyPolicy
         CMDVC?.navBarTitleString = NavBarTitle.privacyPolicy
-
+        
         if let CMDVC = CMDVC {
             navigationController?.pushViewController(CMDVC, animated: true)
         }
@@ -54,7 +52,7 @@ class ProfileChildTabVC: UIViewController {
         let CMDVC = self.storyboard?.instantiateViewController(withIdentifier: ViewControllerIdentifier.LinksWebVC) as? LinksWebVC
         CMDVC?.webLinkUrlString = kBASEURL + SettingWebLinks.termsAndConditions
         CMDVC?.navBarTitleString = NavBarTitle.termsAndConditions
-
+        
         if let CMDVC = CMDVC {
             navigationController?.pushViewController(CMDVC, animated: true)
         }
@@ -62,18 +60,18 @@ class ProfileChildTabVC: UIViewController {
     
     @IBAction func logOutBtnAction(_ sender: Any) {
         let alert = UIAlertController(title: AppAlertTitle.appName.rawValue, message: "Are you sure you want to logout?", preferredStyle: UIAlertController.Style.alert)
-
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { _ in
-                   //Cancel Action
-               }))
-               alert.addAction(UIAlertAction(title: "Sign out",
-                                             style: UIAlertAction.Style.destructive,
-                                             handler: {(_: UIAlertAction!) in
-                                               //Sign out action
-                                                self.logOutApi()
-
-               }))
-               self.present(alert, animated: true, completion: nil)
+            //Cancel Action
+        }))
+        alert.addAction(UIAlertAction(title: "Sign out",
+                                      style: UIAlertAction.Style.destructive,
+                                      handler: {(_: UIAlertAction!) in
+            //Sign out action
+            self.logOutApi()
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     open func setUIValuesUpdate(dict:[String:AnyHashable]){
@@ -90,7 +88,7 @@ class ProfileChildTabVC: UIViewController {
         super.viewWillAppear(true)
         self.tabBarController?.tabBar.isHidden = false
         getProfileDetail()
-
+        
     }
     @IBAction func editProfileBtnAction(_ sender: Any) {
         let CMDVC = self.storyboard?.instantiateViewController(withIdentifier: ViewControllerIdentifier.EditProfileVC) as? EditProfileVC
@@ -102,9 +100,9 @@ class ProfileChildTabVC: UIViewController {
     open func logOutApi(){
         
         let userId = getSAppDefault(key: "UserId") as? String ?? ""
-
+        
         let authToken  = getSAppDefault(key: "AuthToken") as? String ?? ""
-
+        
         let paramds = ["userId":userId] as [String : Any]
         
         let strURL = kBASEURL + WSMethods.logOut
@@ -117,27 +115,25 @@ class ProfileChildTabVC: UIViewController {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any] {
-                        print(JSON as NSDictionary)
                         let getProfileResp =  ForgotPasswordData.init(dict: JSON )
                         
-                        //                let status = jsonResult?["status"] as? Int ?? 0
                         if getProfileResp?.status == 1{
                             removeAppDefaults(key:"AuthToken")
-                    
+                            
                             self.appDel.logOut()
-                          
-                           
+                            
+                            
                             
                         }else{
                             DispatchQueue.main.async {
-
-                            Alert.present(
-                                title: AppAlertTitle.appName.rawValue,
-                                message: getProfileResp?.message ?? "",
-                                actions: .ok(handler: {
-                                }),
-                                from: self
-                            )
+                                
+                                Alert.present(
+                                    title: AppAlertTitle.appName.rawValue,
+                                    message: getProfileResp?.message ?? "",
+                                    actions: .ok(handler: {
+                                    }),
+                                    from: self
+                                )
                             }
                         }
                         
@@ -145,28 +141,27 @@ class ProfileChildTabVC: UIViewController {
                     }
                 case .failure(let error):
                     let error : NSError = error as NSError
-                    print(error)
-//                    DispatchQueue.main.async {
-//
-//                    Alert.present(
-//                        title: AppAlertTitle.appName.rawValue,
-//                        message: AppAlertTitle.connectionError.rawValue,
-//                        actions: .ok(handler: {
-//                        }),
-//                        from: self
-//                    )
-//                    }
+                    //                    DispatchQueue.main.async {
+                    //
+                    //                    Alert.present(
+                    //                        title: AppAlertTitle.appName.rawValue,
+                    //                        message: AppAlertTitle.connectionError.rawValue,
+                    //                        actions: .ok(handler: {
+                    //                        }),
+                    //                        from: self
+                    //                    )
+                    //                    }
                 }
             }
-     
+        
         
     }
     open func getProfileDetail(){
         
         let userId = getSAppDefault(key: "UserId") as? String ?? ""
-
+        
         let authToken  = getSAppDefault(key: "AuthToken") as? String ?? ""
-
+        
         let paramds = ["userId":userId] as [String : Any]
         
         let strURL = kBASEURL + WSMethods.getUserDetail
@@ -179,26 +174,24 @@ class ProfileChildTabVC: UIViewController {
                 switch response.result {
                 case .success(let value):
                     if let JSON = value as? [String: Any] {
-                        print(JSON as NSDictionary)
                         let getProfileResp =  GetProfileData.init(dict: JSON )
                         
-                        //                let status = jsonResult?["status"] as? Int ?? 0
                         if getProfileResp?.status == 1{
                             let userDetailDict = getProfileResp?.user_detail as? [String:AnyHashable] ?? [:]
                             self.userDetailDict = getProfileResp?.user_detail as? [String:AnyHashable] ?? [:]
                             self.setUIValuesUpdate(dict:userDetailDict)
- 
+                            
                             
                         }else{
                             DispatchQueue.main.async {
-
-                            Alert.present(
-                                title: AppAlertTitle.appName.rawValue,
-                                message: getProfileResp?.message ?? "",
-                                actions: .ok(handler: {
-                                }),
-                                from: self
-                            )
+                                
+                                Alert.present(
+                                    title: AppAlertTitle.appName.rawValue,
+                                    message: getProfileResp?.message ?? "",
+                                    actions: .ok(handler: {
+                                    }),
+                                    from: self
+                                )
                             }
                         }
                         
@@ -206,21 +199,20 @@ class ProfileChildTabVC: UIViewController {
                     }
                 case .failure(let error):
                     let error : NSError = error as NSError
-                    print(error)
                     DispatchQueue.main.async {
-
-                    Alert.present(
-                        title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
-                        actions: .ok(handler: {
-                        }),
-                        from: self
-                    )
+                        
+                        Alert.present(
+                            title: AppAlertTitle.appName.rawValue,
+                            message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
+                            actions: .ok(handler: {
+                            }),
+                            from: self
+                        )
                     }
                 }
             }
-     
+        
         
     }
-
+    
 }

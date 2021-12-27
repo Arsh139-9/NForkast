@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,7 +21,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="472" height="155"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileImg" translatesAutoresizingMaskIntoConstraints="NO" id="lBB-Tl-yeT">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proIngPlaceholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="lBB-Tl-yeT">
                         <rect key="frame" x="13" y="21" width="89.5" height="113"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="113" id="3ft-er-JvV"/>
@@ -108,6 +108,15 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Par" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnS-7K-gIt">
+                                <rect key="frame" x="0.0" y="105.5" width="193" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                </variation>
+                            </label>
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-fJ-U7j">
@@ -162,6 +171,7 @@
                 <outlet property="buildOrderTheoreticalUsageLbl" destination="peP-BY-ojP" id="1y0-So-Bql"/>
                 <outlet property="decreaseQuantityBtn" destination="9dv-ct-loe" id="cwv-WP-HGi"/>
                 <outlet property="increaseQuantityBtn" destination="Pp4-fJ-U7j" id="ogh-nm-syz"/>
+                <outlet property="parIngredientStatusLbl" destination="TnS-7K-gIt" id="aFg-UO-bz7"/>
             </connections>
             <point key="canvasLocation" x="-119" y="-104"/>
         </tableViewCell>
@@ -169,6 +179,6 @@
     <resources>
         <image name="minusBtnImg" width="76" height="76"/>
         <image name="plusBtnImg" width="76" height="76"/>
-        <image name="profileImg" width="152" height="150"/>
+        <image name="proIngPlaceholderImg" width="103" height="101"/>
     </resources>
 </document>

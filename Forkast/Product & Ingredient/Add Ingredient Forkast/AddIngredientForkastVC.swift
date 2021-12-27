@@ -161,7 +161,7 @@ var mappingUnitId = String()
 
                         Alert.present(
                             title: AppAlertTitle.appName.rawValue,
-                            message: AppAlertTitle.connectionError.rawValue,
+                            message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                             actions: .ok(handler: {
                             }),
                             from: self

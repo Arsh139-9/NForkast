@@ -11,7 +11,7 @@ import SVProgressHUD
 import SDWebImage
 
 class BuildOrderDetailVC: UIViewController {
-
+    
     @IBOutlet weak var salesSliderLbl: UILabel!
     
     @IBOutlet weak var salesSlider: UISlider!
@@ -21,16 +21,16 @@ class BuildOrderDetailVC: UIViewController {
     @IBOutlet weak var commentTV: UITextView!
     
     @IBOutlet weak var buildOrderTBHeightConstraint: NSLayoutConstraint!
-
+    
     var responseArray = [[String:Any]]()
     var delegate: SendingAddBOToBOMainPageDelegateProtocol? = nil
-
+    
     
     var buildId = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         commentTV.textContainerInset = UIEdgeInsets(top: 13, left: 13, bottom: 13, right: 13)
         buildOrderDetailTBView.tableFooterView = UIView()
         buildOrderDetailTBView.estimatedRowHeight = 90
@@ -48,16 +48,7 @@ class BuildOrderDetailVC: UIViewController {
     open func getBuildOrderDetail(){
         let userIds = getSAppDefault(key: "UserId") as? String ?? ""
         let token = getSAppDefault(key: "AuthToken") as? String ?? ""
-//        {
-//        "user_id":"13",
-//        "total_sales":"16000",
-//        "comment":"",
-//        "is_save":"",
-//        "item":[
-//
-//        ]
-//
-//        }
+        
         
         let paramds = ["user_id": userIds,"buildId":buildId,"total_sales":"16000","item":[],"comment":"","is_save":""] as [String : Any]
         
@@ -74,7 +65,6 @@ class BuildOrderDetailVC: UIViewController {
                         print(JSON as NSDictionary)
                         let addDailyInventoryResp =  BuildOrderDetailData.init(dict: JSON )
                         
-                        //                let status = jsonResult?["status"] as? Int ?? 0
                         if addDailyInventoryResp?.status == 1{
                             self.responseArray = addDailyInventoryResp!.buildOrderDetailArr
                             let userDetailDict = addDailyInventoryResp?.buildOrderDetailDict as? [String:AnyHashable] ?? [:]
@@ -83,22 +73,31 @@ class BuildOrderDetailVC: UIViewController {
                             if totalSale == ""{
                                 self.salesSliderLbl.text = "$16,000 Sales"
                             }else{
-                                self.salesSliderLbl.text = "$\(totalSale) Sales"
-                                self.salesSlider.value = (totalSale as NSString).floatValue
+                                let fTotalSale = totalSale.replacingOccurrences(of: ",", with: "")
+                                self.salesSlider.value = (fTotalSale as NSString).floatValue
+                                let bigNumber = self.salesSlider.value
+                                let fDec = bigNumber.rounded(rule: .plain, scale: 0)
+                                let numberFormatter = NumberFormatter()
+                                numberFormatter.numberStyle = .decimal
+                                
+                                guard let formattedNumber = numberFormatter.string(from: NSNumber(value: fDec)) else { return }
+                                print(formattedNumber)
+                                self.salesSliderLbl.text = "$\(formattedNumber) Sales"
+                                
                             }
-                      
+                            
                             self.buildOrderDetailTBView.reloadData()
-
+                            
                         }else{
                             DispatchQueue.main.async {
-
-                            Alert.present(
-                                title: AppAlertTitle.appName.rawValue,
-                                message: addDailyInventoryResp?.message ?? "",
-                                actions: .ok(handler: {
-                                }),
-                                from: self
-                            )
+                                
+                                Alert.present(
+                                    title: AppAlertTitle.appName.rawValue,
+                                    message: addDailyInventoryResp?.message ?? "",
+                                    actions: .ok(handler: {
+                                    }),
+                                    from: self
+                                )
                             }
                         }
                         
@@ -108,16 +107,16 @@ class BuildOrderDetailVC: UIViewController {
                     let error : NSError = error as NSError
                     print(error)
                     DispatchQueue.main.async {
-
-                    Alert.present(
-                        title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
-                        actions: .ok(handler: {
-                        }),
-                        from: self
-                    )
+                        
+                        Alert.present(
+                            title: AppAlertTitle.appName.rawValue,
+                            message:error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
+                            actions: .ok(handler: {
+                            }),
+                            from: self
+                        )
                     }
-
+                    
                 }
             }
         
@@ -129,7 +128,7 @@ extension BuildOrderDetailVC:UITableViewDataSource,UITableViewDelegate{
         return responseArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     
+        
         var cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? BuildOrderDetailCell
         if cell == nil {
             let nib = Bundle.main.loadNibNamed("BuildOrderDetailCell", owner: self, options: nil)
@@ -140,28 +139,31 @@ extension BuildOrderDetailVC:UITableViewDataSource,UITableViewDelegate{
         let respDict = responseArray[indexPath.row]
         cell?.buildOrderProductNameLbl.text = respDict["name"] as? String ?? ""
         cell?.buildOrderIngredientNameLbl.text = respDict["category"] as? String ?? ""
-        cell?.buildOrderCaseLbl.text = respDict["mapping_unit"] as? String ?? ""
+//        cell?.buildOrderCaseLbl.text = respDict["inventory_count"] as? String ?? "" == "1" ? respDict["full_unit"] as? String ?? "" : respDict["less_unit"] as? String ?? ""
         cell?.buildOrderQuantityLbl.text = respDict["onHand"] as? String ?? ""
         cell?.buildOrderTheoreticalUsageLbl.text = respDict["theoreticalValue"] as? String ?? ""
-//        let oQ = respDict["orderQuantity"] as? String ?? ""
-//        let fOQ = (oQ as NSString).integerValue
-//
-//        if fOQ < -1{
-//            cell?.buildOrderQuantityTF.textColor = UIColor(red: 0/255.0, green: 151.0/255.0, blue:40.0/255.0, alpha: 1.0)
-//        }
-//        else if fOQ < 0 && fOQ > -1{
-//            cell?.buildOrderQuantityTF.textColor = UIColor.systemYellow
-//
-//        }else{
-//            if #available(iOS 13.0, *) {
-//                cell?.buildOrderQuantityTF.textColor = UIColor.label
-//            } else {
-//                // Fallback on earlier versions
-//            }
-//        }
-        cell?.buildOrderQuantityTF.text = respDict["orderQuantity"] as? String ?? ""
-//        cell?.buildorder.text = respDict["theoreticalValue"] as? String ?? ""
+        cell?.buildOrderCaseLbl.text = respDict["inventory_method"] as? String ?? "" == "1" ? "Par" : "Forkast"
+        let oQ = respDict["orderQuantity"] as? String ?? ""
+        cell?.buildOrderQuantityTF.text = oQ == "0" ? "0.1" : oQ 
+        let fOQ = (oQ as NSString).integerValue
+        cell?.buildOrderQuantityTF.textColor = fOQ <= 0 ? UIColor(red: 0/255.0, green: 151.0/255.0, blue:40.0/255.0, alpha: 1.0) : fOQ < -1 ?  UIColor(red: 0/255.0, green: 151.0/255.0, blue:40.0/255.0, alpha: 1.0) : fOQ < 0 && fOQ > -1 ? UIColor.systemYellow : ColorCompatibility.label
 
+        //        let oQ = respDict["orderQuantity"] as? String ?? ""
+        //        let fOQ = (oQ as NSString).integerValue
+        //
+        //        if fOQ < -1{
+        //            cell?.buildOrderQuantityTF.textColor = UIColor(red: 0/255.0, green: 151.0/255.0, blue:40.0/255.0, alpha: 1.0)
+        //        }
+        //        else if fOQ < 0 && fOQ > -1{
+        //            cell?.buildOrderQuantityTF.textColor = UIColor.systemYellow
+        //
+        //        }else{
+        //            if #available(iOS 13.0, *) {
+        //                cell?.buildOrderQuantityTF.textColor = UIColor.label
+        //            } else {
+        //                // Fallback on earlier versions
+        //            }
+        //        }
         var sPhotoStr = respDict["image"] as? String ?? ""
         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
         if sPhotoStr != ""{
@@ -170,12 +172,12 @@ extension BuildOrderDetailVC:UITableViewDataSource,UITableViewDelegate{
         cell?.increaseQuantityBtn.isHidden = true
         cell?.decreaseQuantityBtn.isHidden = true
         cell?.buildOrderQuantityTF.borderStyle = .none
-//        tableView.layoutIfNeeded()
-//        tableView.estimatedRowHeight = UITableView.automaticDimension
-//
+        //        tableView.layoutIfNeeded()
+        //        tableView.estimatedRowHeight = UITableView.automaticDimension
+        //
         DispatchQueue.main.async {
             self.buildOrderTBHeightConstraint.constant = self.buildOrderDetailTBView.contentSize.height
-
+            
         }
         
         return cell!
@@ -184,6 +186,6 @@ extension BuildOrderDetailVC:UITableViewDataSource,UITableViewDelegate{
         return UIScreen.main.bounds.height * 0.19
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        
     }
 }

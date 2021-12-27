@@ -38,10 +38,6 @@ class BuildOrderListVC: UIViewController {
     }
     @IBAction func navToAddBOrderBtnAction(_ sender: Any) {
         getBuildOrderDetail(buildId:"", sliderVal:16000)
-
-        
-        
-       
     }
     
     @IBAction func backBtnAction(_ sender: Any) {
@@ -108,7 +104,7 @@ class BuildOrderListVC: UIViewController {
 
                     Alert.present(
                         title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
+                        message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                         actions: .ok(handler: {
                         }),
                         from: self
@@ -182,7 +178,7 @@ class BuildOrderListVC: UIViewController {
 
                         Alert.present(
                             title: AppAlertTitle.appName.rawValue,
-                            message: AppAlertTitle.connectionError.rawValue,
+                            message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                             actions: .ok(handler: {
                             }),
                             from: self

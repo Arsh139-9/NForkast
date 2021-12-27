@@ -36,15 +36,74 @@ class DailyInventoryListVC: UIViewController {
             dailyInventoryTBView.reloadData()
         }
 
+
     }
-    @IBAction func navToDIDetailBtnAction(_ sender: Any) {
-        let storyBoard = UIStoryboard(name: StoryboardName.DailyInventory, bundle: nil)
-            let CMDVC = storyBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.AddDailyInventoryVC) as? AddDailyInventoryVC
-      
-        CMDVC?.delegate = self
-            if let CMDVC = CMDVC {
-                self.navigationController?.pushViewController(CMDVC, animated: true)
+  
+    open func dailyInventoryDetailApi(dailyId:String){
+        let userIds = getSAppDefault(key: "UserId") as? String ?? ""
+        let token = getSAppDefault(key: "AuthToken") as? String ?? ""
+        
+        
+        let paramds = ["dailyId": dailyId,"userId": userIds,"itemId":[],"comment":"","draft":"","is_save":""] as [String : Any]
+        
+        let strURL = kBASEURL + WSMethods.addDailyInventoryDetail
+        
+        let urlwithPercentEscapes = strURL.addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        //        SVProgressHUD.show()
+        
+        AF.request(urlwithPercentEscapes!, method: .post, parameters: paramds, encoding: JSONEncoding.default, headers: ["Content-Type":"application/json","Token":token])
+            .responseJSON { (response) in
+                //                SVProgressHUD.dismiss()
+                switch response.result {
+                case .success(let value):
+                    if let JSON = value as? [String: Any] {
+                        print(JSON as NSDictionary)
+                        let addDailyInventoryResp =  AddDetailDailyInventoryData.init(dict: JSON )
+                        
+                        //                let status = jsonResult?["status"] as? Int ?? 0
+                        if addDailyInventoryResp?.status == 1{
+                            
+                            let storyBoard = UIStoryboard(name: StoryboardName.DailyInventory, bundle: nil)
+                            let CMDVC = storyBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.AddDailyInventoryVC) as? AddDailyInventoryVC
+                            
+                            CMDVC?.delegate = self
+                            if let CMDVC = CMDVC {
+                                self.navigationController?.pushViewController(CMDVC, animated: true)
+                            }
+                            
+                            
+                            
+                        }else{
+                            Alert.present(
+                                title: AppAlertTitle.appName.rawValue,
+                                message: "No items available for adding inventory",
+                                actions: .ok(handler: {
+                                }),
+                                from: self
+                            )
+                            
+                        }
+                        
+                        
+                    }
+                case .failure(let error):
+                    let error : NSError = error as NSError
+                    print(error)
+                    
+                }
             }
+        
+    }
+    
+    @IBAction func navToDIDetailBtnAction(_ sender: Any) {
+        dailyInventoryDetailApi(dailyId: "")
+//        let storyBoard = UIStoryboard(name: StoryboardName.DailyInventory, bundle: nil)
+//        let CMDVC = storyBoard.instantiateViewController(withIdentifier: ViewControllerIdentifier.AddDailyInventoryVC) as? AddDailyInventoryVC
+//
+//        CMDVC?.delegate = self
+//        if let CMDVC = CMDVC {
+//            self.navigationController?.pushViewController(CMDVC, animated: true)
+//        }
     }
     @objc func editBtnAction(_ sender: UIButton?) {
         var parentCell = sender?.superview
@@ -127,7 +186,7 @@ class DailyInventoryListVC: UIViewController {
 
                         Alert.present(
                             title: AppAlertTitle.appName.rawValue,
-                            message: AppAlertTitle.connectionError.rawValue,
+                            message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                             actions: .ok(handler: {
                             }),
                             from: self

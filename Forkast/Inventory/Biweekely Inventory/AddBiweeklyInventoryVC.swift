@@ -231,7 +231,7 @@ class AddBiweeklyInventoryVC: UIViewController, UITextFieldDelegate {
 
                     Alert.present(
                         title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
+                        message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                         actions: .ok(handler: {
                         }),
                         from: self
@@ -302,7 +302,7 @@ class AddBiweeklyInventoryVC: UIViewController, UITextFieldDelegate {
 
                     Alert.present(
                         title: AppAlertTitle.appName.rawValue,
-                        message: AppAlertTitle.connectionError.rawValue,
+                        message: error.localizedDescription == "" ? AppAlertTitle.connectionError.rawValue : error.localizedDescription,
                         actions: .ok(handler: {
                         }),
                         from: self
@@ -354,9 +354,9 @@ extension AddBiweeklyInventoryVC:UITableViewDataSource,UITableViewDelegate{
         var sPhotoStr = respDict["image"] as? String ?? ""
         sPhotoStr = sPhotoStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? ""
         if sPhotoStr != ""{
-            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:UIImage(named: "inventoryPlaceholderImg"))
+            cell?.biweeklyProfileImg.sd_setImage(with: URL(string: sPhotoStr), placeholderImage:UIImage(named: "proIngPlaceholderImg"))
         }else{
-            cell?.biweeklyProfileImg.image = UIImage(named: "inventoryPlaceholderImg")
+            cell?.biweeklyProfileImg.image = UIImage(named: "proIngPlaceholderImg")
         }
 
         DispatchQueue.main.async {

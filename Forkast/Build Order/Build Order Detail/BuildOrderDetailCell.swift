@@ -21,6 +21,7 @@ class BuildOrderDetailCell: UITableViewCell {
     
     @IBOutlet weak var buildOrderTheoreticalUsageLbl: UILabel!
     
+    @IBOutlet weak var parIngredientStatusLbl: UILabel!
     
     @IBOutlet weak var buildOrderQuantityTF: UITextField!
     
